@@ -7,4 +7,17 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin' => $vendorDir . '/dealerdirect/phpcodesniffer-composer-installer/src/Plugin.php',
+    'VariableAnalysis\\Lib\\Constants' => $vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Lib/Constants.php',
+    'VariableAnalysis\\Lib\\Helpers' => $vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Lib/Helpers.php',
+    'VariableAnalysis\\Lib\\ScopeInfo' => $vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Lib/ScopeInfo.php',
+    'VariableAnalysis\\Lib\\ScopeType' => $vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Lib/ScopeType.php',
+    'VariableAnalysis\\Lib\\VariableInfo' => $vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Lib/VariableInfo.php',
+    'VariableAnalysis\\Sniffs\\CodeAnalysis\\VariableAnalysisSniff' => $vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Sniffs/CodeAnalysis/VariableAnalysisSniff.php',
+    'WpStarterPlugin\\PostTypes\\ExamplePostType' => $baseDir . '/src/classes/PostTypes/ExamplePostType.php',
+    'WpStarterPlugin\\Settings\\ExampleACFSettingsPage' => $baseDir . '/src/classes/Settings/ExampleACFSettingsPage.php',
+    'WpStarterPlugin\\Settings\\ExampleSettingsPage' => $baseDir . '/src/classes/Settings/ExampleSettingsPage.php',
+    'WpStarterPlugin\\Settings\\ExampleSettingsSubPage' => $baseDir . '/src/classes/Settings/ExampleSettingsSubPage.php',
+    'WpStarterPlugin\\Settings\\SettingsPage' => $baseDir . '/src/classes/Settings/SettingsPage.php',
+    'WpStarterPlugin\\WpStarterPlugin' => $baseDir . '/src/classes/WpStarterPlugin.php',
 );
