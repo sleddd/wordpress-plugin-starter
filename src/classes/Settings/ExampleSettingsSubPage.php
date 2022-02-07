@@ -6,19 +6,19 @@
 class ExampleSettingsSubPage extends SettingsPage {
 
 	public static $instance = null;
-	
+
 	public static $SETTINGS_PAGE = array(
-		'parent_slug'   => 'theme_options',
-		'menu_title' 	=> 'Sub Page',
-		'page_title' 	=> 'Page Title',
-		'slug'  	=> 'suboptions',
-		'capability' 	=> 'administrator',
-		'template'   	=> 'wrapper',
+		'parent_slug' => 'theme_options',
+		'menu_title'  => 'Sub Page',
+		'page_title'  => 'Page Title',
+		'slug'        => 'suboptions',
+		'capability'  => 'administrator',
+		'template'    => 'wrapper',
 	);
 
 	public static $SETTINGS_SECTIONS = array(
 		array(
-			'id'	      => 'section_one',
+			'id'          => 'section_one',
 			'title'       => 'Subsection One Example',
 			'description' => 'Subsection one description.',
 			'template'    => 'section',
@@ -84,7 +84,7 @@ class ExampleSettingsSubPage extends SettingsPage {
 
 	public static function get_instance() {
 		if ( self::$instance === null ) {
-			self::$instance = new ExampleSettingsSubPage;
+			self::$instance = new ExampleSettingsSubPage();
 		}
 		return self::$instance;
 	}

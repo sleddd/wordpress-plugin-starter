@@ -8,23 +8,23 @@ class ExampleSettingsPage extends SettingsPage {
 	public static $instance = null;
 
 	public static $SETTINGS_PAGE = array(
-		'menu_title' 	=> 'Main Page',
-		'page_title' 	=> 'Page Title',
-		'slug'  	=> 'theme_options',
-		'capability' 	=> 'administrator',
-		'template'   	=> 'wrapper',
+		'menu_title' => 'Main Page',
+		'page_title' => 'Page Title',
+		'slug'       => 'theme_options',
+		'capability' => 'administrator',
+		'template'   => 'wrapper',
 	);
 
 	public static $SETTINGS_SECTIONS = array(
 		array(
 			'title'       => 'Section One Example',
-			'id'	      => 'tab_1',
+			'id'          => 'tab_1',
 			'description' => 'Section one description',
 			'template'    => 'section',
 		),
 		array(
 			'title'       => 'Section Two Example',
-			'id'	      => 'tab_2',
+			'id'          => 'tab_2',
 			'description' => 'Section two description.',
 			'template'    => 'section',
 		),
@@ -32,12 +32,12 @@ class ExampleSettingsPage extends SettingsPage {
 
 	public static $SETTINGS_TABS = array(
 		array(
-			'title'   => 'Tab 1',
-			'slug'    => 'tab_1',
+			'title' => 'Tab 1',
+			'slug'  => 'tab_1',
 		),
 		array(
-			'title'   => 'Tab 2',
-			'slug'    => 'tab_2',
+			'title' => 'Tab 2',
+			'slug'  => 'tab_2',
 		),
 	);
 
@@ -92,7 +92,7 @@ class ExampleSettingsPage extends SettingsPage {
 
 	public static function get_instance() {
 		if ( self::$instance === null ) {
-			self::$instance = new ExampleSettingsPage;
+			self::$instance = new ExampleSettingsPage();
 		}
 		return self::$instance;
 	}

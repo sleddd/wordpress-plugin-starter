@@ -1,38 +1,20 @@
 <?php namespace WpStarterPlugin;
 
+use WpStarterPlugin\Base\Singleton;
+use WpStarterPlugin\Base\API;
+
 /**
  * Manages plugin initialization.
  */
-class WpStarterPlugin {
+class WpStarterPlugin extends Singleton {
 
-	/**
-	 * Holds an instance of the plugin.
-	 *
-	 * @var object $instance Instance of plugin.
-	 */
-	public static $instance = null;
-
-	/**
-	 * Prevents initialization in outer code.
-	 */
-	private function __construct() {}
-
-	/**
-	 * Returns instance of the plugin.
-	 */
-	public static function get_instance() {
-		if ( self::$instance == null ) {
-			self::$instance = new WpStarterPlugin();
-		}
-		return self::$instance;
-	}
+	public static $TEST_API = array();
 
 	/**
 	 * Registers any needed WordPress hooks, actions, filters.
 	 */
 	public static function init() {
-
-		$plugin = self::get_instance();
+		$plugin = self::instance();
 
 		// Register activation and deactivation hooks
 		register_activation_hook( WP_STARTER_PLUGIN_PATH . 'wp-starter-plugin.php', array( __NAMESPACE__ . '\\WpStarterPlugin', 'activate_plugin' ) );
@@ -59,10 +41,13 @@ class WpStarterPlugin {
 		// Hide the ACF admin menu item.
 		add_filter(
 			'acf/settings/show_admin',
-			function( $show_admin ) {
+			function ( $show_admin ) {
 				return false;
 			}
 		);
+
+		// Set up apis for user in plugin or theme
+		$plugin::init_api();
 
 		return $plugin;
 	}
@@ -70,12 +55,24 @@ class WpStarterPlugin {
 	/**
 	 *  Manages tasks done on plugin activation.
 	 */
-	public static function activate_plugin() {}
+	public static function activate_plugin() {  }
 
 	/**
 	 * Manages tasks done on plugin deactivation.
 	 */
 	public static function deactivate_plugin() {}
+
+	/* Add a static api endpoint - only for API endpoints that do change */
+	private static function init_api() {
+		self::$TEST_API = new API(
+			'placeholder_test',
+			'https://jsonplaceholder.typicode.com/todos',
+			false,
+			false,
+			true,
+			0
+		);
+	}
 
 	/**
 	 * Registration for custom settings pages.
@@ -83,7 +80,7 @@ class WpStarterPlugin {
 	public static function register_settings_pages() {
 		\WpStarterPlugin\Settings\ExampleSettingsPage::init();
 		\WpStarterPlugin\Settings\ExampleSettingsSubPage::init();
-		//\WpStarterPlugin\Settings\ExampleACFSettingsPage::init();
+		// \WpStarterPlugin\Settings\ExampleACFSettingsPage::init();
 	}
 
 	/**
@@ -137,7 +134,7 @@ class WpStarterPlugin {
 	 * Registration for frontend scripts and script localization.
 	 */
 	public static function enqueue_frontend_scripts() {
-		wp_enqueue_script( 'wpstarterplugin-scripts', WP_STARTER_PLUGIN_URL . 'dist/js/frontend.js', 'jquery', rand(), true );
+		 wp_enqueue_script( 'wpstarterplugin-scripts', WP_STARTER_PLUGIN_URL . 'dist/js/frontend.js', 'jquery', rand(), true );
 		$nonce = wp_create_nonce( 'ajax_nonce' );
 		wp_localize_script(
 			'wpstarterplugin-frontend-scripts',
@@ -169,8 +166,8 @@ class WpStarterPlugin {
 	 * Echoes browsersync custom script tag.
 	 */
 	public static function add_browser_sync() {
-		// echo '<script id="__bs_script__">//<![CDATA[
-			// document.write("<script async src=' . 'http://HOST:62584/browser-sync/browser-sync-client.js?v=2.27.7' . '><\/script>".replace("HOST", location.hostname));
-			// ]]></script>';
+		 // echo '<script id="__bs_script__">//<![CDATA[
+		// document.write("<script async src=' . 'http://HOST:62584/browser-sync/browser-sync-client.js?v=2.27.7' . '><\/script>".replace("HOST", location.hostname));
+		// ]]></script>';
 	}
 }

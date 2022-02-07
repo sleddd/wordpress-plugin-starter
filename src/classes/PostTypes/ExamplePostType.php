@@ -1,32 +1,30 @@
 <?php namespace WpStarterPlugin\PostTypes;
 
+use WpStarterPlugin\Base\Singleton;
+
 /**
  * Example custom post type.
- * 
+ *
  * Provides example of how to add a custom post type.
  * Uses /src/lib/postTypes.php functions.
  */
-class ExamplePostType {
+class ExamplePostType extends Singleton {
 
-	public static $instance = null;
-
-	/** 
+	/**
 	 * Declares post type and taxonomy names.
-	 */ 
+	 */
 	const POST_TYPE_NAME = 'Example';
 	const POST_TYPE_TAX  = array( 'Genre', 'Topic' );
-
-	private function __construct() {}
 
 	/**
 	 * Registers custom post type.
 	 */
 	public static function init() {
-		register_post_type( ExamplePostType::POST_TYPE_NAME );
-		foreach ( ExamplePostType::POST_TYPE_TAX as $genre ) {
-			add_taxonomy( $genre, ExamplePostType::POST_TYPE_NAME );
+		register_post_type( self::POST_TYPE_NAME );
+		foreach ( self::POST_TYPE_TAX as $genre ) {
+			add_taxonomy( $genre, self::POST_TYPE_NAME );
 		}
-		ExamplePostType::add_post_type_custom_fields();
+		self::add_post_type_custom_fields();
 	}
 
 	/**
@@ -67,7 +65,7 @@ class ExamplePostType {
 			),
 			'normal',
 			'default',
-			ExamplePostType::POST_TYPE_NAME
+			self::POST_TYPE_NAME
 		);
 	}
 }

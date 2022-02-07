@@ -14,6 +14,8 @@ return array(
     'VariableAnalysis\\Lib\\ScopeType' => $vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Lib/ScopeType.php',
     'VariableAnalysis\\Lib\\VariableInfo' => $vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Lib/VariableInfo.php',
     'VariableAnalysis\\Sniffs\\CodeAnalysis\\VariableAnalysisSniff' => $vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Sniffs/CodeAnalysis/VariableAnalysisSniff.php',
+    'WpStarterPlugin\\Base\\API' => $baseDir . '/src/classes/Base/API.php',
+    'WpStarterPlugin\\Base\\Singleton' => $baseDir . '/src/classes/Base/Singleton.php',
     'WpStarterPlugin\\PostTypes\\ExamplePostType' => $baseDir . '/src/classes/PostTypes/ExamplePostType.php',
     'WpStarterPlugin\\Settings\\ExampleACFSettingsPage' => $baseDir . '/src/classes/Settings/ExampleACFSettingsPage.php',
     'WpStarterPlugin\\Settings\\ExampleSettingsPage' => $baseDir . '/src/classes/Settings/ExampleSettingsPage.php',

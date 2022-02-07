@@ -29,8 +29,8 @@ class ComposerStaticInit3831819c8c8a3f9d6f84c9c1fd85192a
         'WpStarterPlugin\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/classes',
-            1 => __DIR__ . '/../..' . '/src/classes/PostTypes',
-            2 => __DIR__ . '/../..' . '/src/classes/Settings',
+            1 => __DIR__ . '/../..' . '/src/classes/*',
+            2 => __DIR__ . '/../..' . '/src/classes/*/*',
         ),
         'VariableAnalysis\\' => 
         array (
@@ -51,6 +51,8 @@ class ComposerStaticInit3831819c8c8a3f9d6f84c9c1fd85192a
         'VariableAnalysis\\Lib\\ScopeType' => __DIR__ . '/..' . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Lib/ScopeType.php',
         'VariableAnalysis\\Lib\\VariableInfo' => __DIR__ . '/..' . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Lib/VariableInfo.php',
         'VariableAnalysis\\Sniffs\\CodeAnalysis\\VariableAnalysisSniff' => __DIR__ . '/..' . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis/Sniffs/CodeAnalysis/VariableAnalysisSniff.php',
+        'WpStarterPlugin\\Base\\API' => __DIR__ . '/../..' . '/src/classes/Base/API.php',
+        'WpStarterPlugin\\Base\\Singleton' => __DIR__ . '/../..' . '/src/classes/Base/Singleton.php',
         'WpStarterPlugin\\PostTypes\\ExamplePostType' => __DIR__ . '/../..' . '/src/classes/PostTypes/ExamplePostType.php',
         'WpStarterPlugin\\Settings\\ExampleACFSettingsPage' => __DIR__ . '/../..' . '/src/classes/Settings/ExampleACFSettingsPage.php',
         'WpStarterPlugin\\Settings\\ExampleSettingsPage' => __DIR__ . '/../..' . '/src/classes/Settings/ExampleSettingsPage.php',

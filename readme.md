@@ -32,8 +32,6 @@ NPM Scripts include:
 - npm run dev
 - npm run dev:watch
 
-
-
 ---
 ### Additional Notes
 
@@ -64,6 +62,44 @@ To add custom settings or options pages see examples:
 /src/classes/Settings/ExampleSettingsPage.php
 /src/classes/Settings/ExampleSettingsSubPage.php
 ```
+
+------------
+API REQUESTS
+
+API requests make use of the base API class. Depending on how you set it up, it also lets you reuse endpoints throughout the plugin or theme quickly and easiliy. There is an example built into the main plugin init file where the test API is added as a static property to hold the API instance and then initialized in the init_api method with the API Base class.
+
+API Base class instance
+
+```
+new API(
+    'yourendpoint_name',
+    'https://yourendpoint',
+    false, // Auth token for Basic Auth 
+    false, // args 
+    false, // show errors
+    true, // cache - a transient
+    0 // timeout in minutes
+);
+```
+
+Below shows how to use it after it has been instanced via base class. The example uses the main plugin instance of the test api: 
+
+// To access directly via namespace in longform
+\WpStarterPlugin\WpStarterPlugin::$instance::$TEST_API->remote_get();
+
+// Stored in variable 
+$wp_starter_plugin = \WpStarterPlugin\WpStarterPlugin::$instance;
+
+// Access transient directly 
+get_transient($wp_starter_plugin::$TEST_API->name);
+
+// Bypass transient torequest a different endpoint or variation.
+$wp_starter_plugin::$TEST_API->cache = false;
+$wp_starter_plugin::$TEST_API->url = $wp_starter_plugin::$TEST_API->url . '/1';
+$wp_starter_plugin::$TEST_API->remote_get();
+
+----------------
+GUTENBERG BLOCKS 
 
 Gutenberg blocks can be registered in JavaScript. See hello-world block as an example: src/blocks/hello-world
 

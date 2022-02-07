@@ -2,10 +2,12 @@
 
 namespace WpStarterPlugin\Settings;
 
+use WpStarterPlugin\Singleton;
+
 /**
  * Example for settings menu page using Advanced Custom Fields.
  */
-class ExampleACFSettingsPage {
+class ExampleACFSettingsPage extends Singleton {
 	
 	/**
 	 * Declares setting page title, menu title, and slug.
@@ -13,8 +15,6 @@ class ExampleACFSettingsPage {
 	const PAGE_TITLE = 'Theme General Settings';
 	const MENU_TITLE = 'Theme Settings';
 	const MENU_SLUG  = 'theme-general-settings';
-
-	private function __construct() {}
 
 	/* 
 	* Registers acf options page.

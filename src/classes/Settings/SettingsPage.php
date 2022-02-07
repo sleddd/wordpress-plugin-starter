@@ -167,7 +167,7 @@ class SettingsPage {
 
 	/**
 	 * Saves fields for a settings page.
-	 * 
+	 *
 	 * @param array $fields Fields to be saved.
 	 */
 	public static function save_fields( $fields ) {
@@ -194,7 +194,7 @@ class SettingsPage {
 
 	/**
 	 * Renders a settings field by type.
-	 * 
+	 *
 	 * @param array $field Fields to be rendered.
 	 */
 	public function render_fields( $field ) {
