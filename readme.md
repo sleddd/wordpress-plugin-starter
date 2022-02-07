@@ -94,9 +94,9 @@ Access transient directly:\
 get_transient($wp_starter_plugin::$TEST_API->name);
 
 Bypass transient to request a different endpoint or variation:\
-$wp_starter_plugin::$TEST_API->cache = false;
-$wp_starter_plugin::$TEST_API->url = $wp_starter_plugin::$TEST_API->url . '/1';
-$wp_starter_plugin::$TEST_API->remote_get();
+$wp_starter_plugin::$TEST_API->cache = false; \
+$wp_starter_plugin::$TEST_API->url = $wp_starter_plugin::$TEST_API->url . '/1'; \
+$wp_starter_plugin::$TEST_API->remote_get(); \
 
 I do plan on adding additional support for async api requests that run use non-blocking calls to wp-cron to process a queue storing the api requests when I can find time.
 
