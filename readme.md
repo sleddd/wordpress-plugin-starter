@@ -98,6 +98,8 @@ $wp_starter_plugin::$TEST_API->cache = false;
 $wp_starter_plugin::$TEST_API->url = $wp_starter_plugin::$TEST_API->url . '/1';
 $wp_starter_plugin::$TEST_API->remote_get();
 
+I do plan on adding additional support for async api requests that run use non-blocking calls to wp-cron to process a queue storing the api requests when I can find time.
+
 ----------------
 GUTENBERG BLOCKS 
 
@@ -110,4 +112,4 @@ To rename this plugin with your plugin name, you will want to find and replace t
 
 Run composer dump-autoload -o to rebuild the autoload files when done.
 
-!! This plugin is not currently maintained except when I get time. I do plan to add additional support for REST API, customizer, tables, and additional ACF integration, but do not know when that will be.
+!! This plugin is not currently maintained except when I get time.
