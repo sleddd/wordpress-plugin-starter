@@ -1,0 +1,9 @@
+{
+    "/dist/js/backend.js": "/dist/js/backend.js",
+    "/dist/js/frontend.js": "/dist/js/frontend.js",
+    "/dist/js/blocks.js": "/dist/js/blocks.js",
+    "/dist/css/frontend.css": "/dist/css/frontend.css",
+    "/dist/css/backend.css": "/dist/css/backend.css",
+    "/dist/css/blocks-editor.css": "/dist/css/blocks-editor.css",
+    "/dist/css/blocks.css": "/dist/css/blocks.css"
+}

@@ -6,14 +6,18 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 WordPress plugin starter code for easier development.
 
 ![Composer](https://img.shields.io/badge/Composer-brightgreen)
-![Node 14.16.0](https://img.shields.io/badge/Node-14.16.0-brightgreen)
-![WebPack 5.12.3](https://img.shields.io/badge/WebPack-5.12.3-brightgreen)
-![Babel 7.12.10](https://img.shields.io/badge/Babel-7.12.10-brightgreen)
-![BrowserSync 2.26.13](https://img.shields.io/badge/BrowserSync-2.26.13-brightgreen)
-![PostCSS 8.2.4](https://img.shields.io/badge/PostCSS-8.2.4-brightgreen)
-![PurgeCSS 3.1.3](https://img.shields.io/badge/PurgeCSS-3.1.3-brightgreen)
+![Node 14.17.0](https://img.shields.io/badge/Node-14.16.0-brightgreen)
+![WebPack 5.74.0](https://img.shields.io/badge/WebPack-5.12.3-brightgreen)
+![Babel 7.18.3](https://img.shields.io/badge/Babel-7.12.10-brightgreen)
+![PostCSS](https://img.shields.io/badge/PostCSS-8.2.4-brightgreen)
+![PurgeCSS](https://img.shields.io/badge/PurgeCSS-3.1.3-brightgreen)
 
-This plugin uses webpack code from [wp-strap/wordpress-webpack-workflow](https://github.com/wp-strap/wordpress-webpack-workflow) which has been modified to support the development of JavaScript registered Gutenberg blocks. Visit [wp-strap/wordpress-webpack-workflow](https://github.com/wp-strap/wordpress-webpack-workflow) for more details.
+This plugin uses Laravel Mix to help transpile code for CSS and Javascript. Laravel Mix can be extended to cover almost all of your transpiling needs. You can find full documentation online at: 
+
+[Laravel Mix - What is mix? - https://laravel-mix.com/docs/6.0/what-is-mix](https://laravel-mix.com/docs/6.0/what-is-mix)
+[Laravel Mix - React/Vue/Typescript Support - https://laravel-mix.com/docs/4.0/mixjs](https://laravel-mix.com/docs/4.0/mixjs)
+[Laravel Mix - TailWind Support - https://laravel-mix.com/extensions/tailwind](https://laravel-mix.com/extensions/tailwind)
+[Laravel Mix - Postcss Support - https://laravel-mix.com/docs/6.0/postcss](https://laravel-mix.com/docs/6.0/postcss)
 
 ---
 ### Basic Installation
@@ -24,13 +28,6 @@ With Composer and Node installed, from the plugin directory, at command line run
 - composer install
 - npm install
 - npm run dev:watch or npm run dev 
-
-\
-NPM Scripts include: 
-- npm run prod
-- npm run prod:watch 
-- npm run dev
-- npm run dev:watch
 
 ---
 ### Additional Notes
@@ -102,6 +99,9 @@ $wp_starter_plugin::$TEST_API->remote_get();
 GUTENBERG BLOCKS 
 
 Gutenberg blocks can be registered in JavaScript. See hello-world block as an example: src/blocks/hello-world
+
+------------------
+MAKING IT YOUR OWN
 
 To rename this plugin with your plugin name, you will want to find and replace the following: 
 - WP_STARTER_PLUGIN

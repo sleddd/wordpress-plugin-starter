@@ -45,7 +45,6 @@
   margin: 0.4rem auto 0.5rem auto;
   color: #888;
 }
-
 .wp_starter_plugin_settings__section {
   background: #fff;
   width: 100%;
@@ -62,3 +61,4 @@
 .wp_starter_plugin_settings select {
   margin-bottom: 0.5rem;
 }
+

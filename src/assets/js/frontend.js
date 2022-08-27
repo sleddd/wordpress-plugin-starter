@@ -11,7 +11,7 @@ import '../sass/frontend.scss';
 // 	// jQuery document ready
 // 	console.log('test');
 // })(jQuery);
-(function () {
+( function() {
 	// Vanilla JS Document Ready
-	console.log('frontend scripts');
-})();
+	console.log( 'frontend scripts' );
+}() );

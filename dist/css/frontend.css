@@ -5,15 +5,12 @@
 .util-color-red {
   color: red;
 }
-
 .util-color-blue {
   color: blue;
 }
-
 .util--normalized {
   font-size: 2px;
 }
-
 /**
 * Importing by glob example
 * https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-magic-importer#globbing
@@ -21,11 +18,34 @@
 .component-1-from-example-1 {
   padding: 1px;
 }
-
 .component-1-from-example-2 {
   padding: 1px;
 }
-
 .component-2-from-example-2 {
   padding: 1px;
+}
+/**
+Postcss-import feature example
+ */
+.component-1-from-example-1 {
+  padding: 1px;
+}
+.component-1-from-example-2 {
+  padding: 1px;
+}
+.component-2-from-example-2 {
+  padding: 1px;
+}
+.test {
+  color: red;
+  /**
+    Postcss-nested feature example
+     */
+  &__blue {
+    color: blue;
+  }
+
+  &__yellow {
+    color: yellow;
+  }
 }

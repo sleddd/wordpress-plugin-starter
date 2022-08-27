@@ -11,7 +11,7 @@ import '../sass/backend.scss';
 // 	// jQuery document ready
 // 	console.log('test');
 // })(jQuery);
-(function () {
+( function() {
 	// Vanilla JS Document Ready
-	console.log('backend scripts');
-})();
+	console.log( 'backend scripts' );
+}() );
