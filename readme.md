@@ -27,7 +27,7 @@ This plugin uses Laravel Mix to help transpile code for CSS and Javascript. Lara
 With Composer and Node installed, from the plugin directory, at command line run: 
 - composer install
 - npm install
-- npm run dev:watch or npm run dev 
+- npm run dev 
 
 ---
 ### Additional Notes
