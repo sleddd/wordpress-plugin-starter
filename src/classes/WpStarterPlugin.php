@@ -32,9 +32,6 @@ class WpStarterPlugin extends Singleton {
 		add_action( 'admin_enqueue_scripts', array( __NAMESPACE__ . '\\WpStarterPlugin', 'enqueue_backend_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __NAMESPACE__ . '\\WpStarterPlugin', 'enqueue_backend_styles' ) );
 
-		// Add browsersync.
-		add_action( 'wp_footer', array( __NAMESPACE__ . '\\WpStarterPlugin', 'add_browser_sync' ) );
-
 		// Add settings pages.
 		$plugin::register_settings_pages();
 
@@ -46,7 +43,7 @@ class WpStarterPlugin extends Singleton {
 			}
 		);
 
-		// Set up apis for user in plugin or theme
+		// Set up apis for user in plugin or theme.
 		$plugin::init_api();
 
 		return $plugin;
@@ -120,28 +117,27 @@ class WpStarterPlugin extends Singleton {
 	 * Registration for frontend plugin styles.
 	 */
 	public static function enqueue_frontend_styles() {
-		wp_enqueue_style( 'wpstarterplugin-styles', WP_STARTER_PLUGIN_URL . 'dist/css/frontend.css', rand(), false, 'all' );
+		wp_enqueue_style( 'wpstarterplugin-styles', WP_STARTER_PLUGIN_URL . 'dist/css/frontend.css', wp_rand(), false, 'all' );
 	}
 
 	/**
 	 * Registration for backend styles.
 	 */
 	public static function enqueue_backend_styles() {
-		wp_enqueue_style( 'wpstarterplugin-styles', WP_STARTER_PLUGIN_URL . 'dist/css/backend.css', rand(), false, 'all' );
+		wp_enqueue_style( 'wpstarterplugin-styles', WP_STARTER_PLUGIN_URL . 'dist/css/backend.css', wp_rand(), false, 'all' );
 	}
 
 	/**
 	 * Registration for frontend scripts and script localization.
 	 */
 	public static function enqueue_frontend_scripts() {
-		 wp_enqueue_script( 'wpstarterplugin-scripts', WP_STARTER_PLUGIN_URL . 'dist/js/frontend.js', 'jquery', rand(), true );
-		$nonce = wp_create_nonce( 'ajax_nonce' );
+		 wp_enqueue_script( 'wpstarterplugin-scripts', WP_STARTER_PLUGIN_URL . 'dist/js/frontend.js', 'jquery', wp_rand(), true );
 		wp_localize_script(
 			'wpstarterplugin-frontend-scripts',
 			'wpstarterplugin',
 			array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'nonce'   => $nonce,
+				'nonce'   => wp_create_nonce( 'ajax_nonce' ),
 			)
 		);
 	}
@@ -151,23 +147,13 @@ class WpStarterPlugin extends Singleton {
 	 */
 	public static function enqueue_backend_scripts() {
 		wp_enqueue_script( 'wpstarterplugin-scripts', WP_STARTER_PLUGIN_URL . 'dist/js/backend.js', 'jquery', rand(), true );
-		$nonce = wp_create_nonce( 'ajax_nonce' );
 		wp_localize_script(
 			'wpstarterplugin-backend-scripts',
 			'wpstarterplugin',
 			array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'nonce'   => $nonce,
+				'nonce'   => wp_create_nonce( 'ajax_nonce' ),
 			)
 		);
-	}
-
-	/**
-	 * Echoes browsersync custom script tag.
-	 */
-	public static function add_browser_sync() {
-		 // echo '<script id="__bs_script__">//<![CDATA[
-		// document.write("<script async src=' . 'http://HOST:62584/browser-sync/browser-sync-client.js?v=2.27.7' . '><\/script>".replace("HOST", location.hostname));
-		// ]]></script>';
 	}
 }

@@ -199,18 +199,19 @@ class SettingsPage {
 	 */
 	public function render_fields( $field ) {
 		$option = get_option( $field['id'] );
+
 		switch ( $field['type'] ) {
 			case 'text':
-				echo '<div><input type="text" name="' . $field['id'] . '" id="' . $field['id'] . '" value="' . esc_attr( $option ) . '" />';
+				echo '<div><input type="text" name="' . esc_attr( $field['id'] ) . '" id="' . esc_attr( $field['id'] ) . '" value="' . esc_attr( $option ) . '" />';
 				if ( array_key_exists( 'description', $field ) ) {
-					echo '<span class="description">' . $field['description'] . '</span>';
+					echo '<span class="description">' . wp_kses_post( $field['description'] ) . '</span>';
 				}
 				echo '</div>';
 				break;
 			case 'textarea':
-				echo '<div><textarea name="' . $field['id'] . '" id="' . $field['id'] . '">' . esc_attr( $option ) . '</textarea>';
+				echo '<div><textarea name="' . esc_attr( $field['id'] ) . '" id="' . esc_attr( $field['id'] ) . '">' . esc_attr( $option ) . '</textarea>';
 				if ( array_key_exists( 'description', $field ) ) {
-					echo '<span class="description">' . $field['description'] . '</span>';
+					echo '<span class="description">' . wp_kses_post( $field['description'] ) . '</span>';
 				}
 				echo '</div>';
 				break;
@@ -220,39 +221,39 @@ class SettingsPage {
 					$options_count = 1;
 					foreach ( $field['options'] as $field_option ) {
 						$checked = is_array( $option ) && $option[ $options_count ] === $field_option['value'] ? 'checked="checked"' : '';
-						echo '<label for="' . $field['id'] . '">' . $field_option['label'] . '</label><input type="checkbox" name="' . $field['id'] . '[' . $options_count . ']" id="' . $field['id'] . '[' . $options_count . ']" value="' . $field_option['value'] . '"' . $checked . '/>';
+						echo '<label for="' . esc_attr( $field['id'] ) . '">' . wp_kses_post( $field_option['label'] ) . '</label><input type="checkbox" name="' . esc_attr( $field['id'] ) . '[' . (int) $options_count . ']" id="' . esc_attr( $field['id'] ) . '[' . (int) $options_count . ']" value="' . esc_attr( $field_option['value'] ) . '"' . $checked . '/>';
 						$options_count++;
 					}
-					echo '<input type="hidden" name="' . $field['id'] . '[hidden]" value="0"/>';
+					echo '<input type="hidden" name="' . esc_attr( $field['id'] ) . '[hidden]" value="0"/>';
 					echo '</div>';
 					if ( array_key_exists( 'description', $field ) ) {
-						echo '<span class="description">' . $field['description'] . '</span>';
+						echo '<span class="description">' . wp_kses_post( $field['description'] ) . '</span>';
 					}
 				}
 				if ( array_key_exists( 'desc', $field ) ) {
-					echo '<span class="description">' . $field['desc'] . '</span>';
+					echo '<span class="description">' . wp_kses_post( $field['desc'] ) . '</span>';
 				}
 				break;
 			case 'radio':
 				echo '<div class="fieldset">';
 				foreach ( $field['options'] as $field_option ) {
 					$checked = $option === $field_option['value'] ? 'checked="checked"' : '';
-					echo '<label for="' . $field['id'] . '">' . $field_option['label'] . '</label><input type="radio" name="' . $field['id'] . '" id="' . $field['id'] . '" value="' . $field_option['value'] . '"' . $checked . '/>';
+					echo '<label for="' . esc_attr( $field['id'] ) . '">' . wp_kses_post( $field_option['label'] ) . '</label><input type="radio" name="' . esc_attr( $field['id'] ) . '" id="' . esc_attr( $field['id'] ) . '" value="' . esc_attr( $field_option['value'] ) . '"' . $checked . '/>';
 				}
 				echo '</div>';
 				if ( array_key_exists( 'description', $field ) ) {
-					echo '<span class="description">' . $field['description'] . '</span>';
+					echo '<span class="description">' . wp_kses_post( $field['description'] ) . '</span>';
 				}
 				break;
 			case 'select':
-				echo '<br/><select name="' . $field['id'] . '" id="' . $field['id'] . '">';
-				echo '<option class="disabled">' . __( $field['label'], 'wpstarterplugin' ) . '</option>';
+				echo '<br/><select name="' . esc_attr( $field['id'] ) . '" id="' . esc_attr( $field['id'] ) . '">';
+				echo '<option class="disabled">' . __( wp_kses_post( $field['label'] ), 'wpstarterplugin' ) . '</option>';
 				foreach ( $field['options'] as $field_option ) {
-					echo '<option', $option === $field_option['value'] ? ' selected="selected"' : '', ' value="' . $field_option['value'] . '">' . $field_option['label'] . '</option>';
+					echo '<option', $option === $field_option['value'] ? ' selected="selected"' : '', ' value="' . esc_attr( $field_option['value'] ) . '">' . wp_kses_post( $field_option['label'] ) . '</option>';
 				}
 				echo '</select>';
 				if ( array_key_exists( 'description', $field ) ) {
-					echo '<span class="description">' . $field['description'] . '</span>';
+					echo '<span class="description">' . wp_kses_post( $field['description'] ) . '</span>';
 				}
 				break;
 		}

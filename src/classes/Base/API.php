@@ -73,13 +73,13 @@ class API {
 	 * @return void
 	 */
 	public function __construct( $name = '', $url, $token, $args, $show_errors = false, $cache = true, $timeout = 15 ) {
-		$this->name        = $this->name = $name . '_api_request';
-		$this->url    = $url;
+		$this->name        = esc_attr( $name . '_api_request' );
+		$this->url         = $url;
 		$this->token       = $token;
 		$this->args        = $args;
 		$this->show_errors = $show_errors;
 		$this->cache       = $cache;
-		$this->timeout    = $timeout;
+		$this->timeout     = $timeout;
 	}
 
 	/**
