@@ -1,0 +1,49 @@
+ .question-container {
+   background: #ebebeb;
+   padding: 20px;
+
+   .question {
+     margin: 1rem auto;
+     padding-bottom: 1rem;
+     border-bottom: 1px solid #ddd;
+   }
+
+   ul {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+     text-align: center;
+     padding-left: 0;
+
+     li {
+       display: inline;
+       list-style-type: none;
+       background: #cccc;
+       margin: auto 10px;
+       padding: 15px;
+       width: calc(100%/3);
+
+       &:hover {
+         background: #f7d794;
+       }
+
+     }
+   }
+
+   .answer {
+     margin: 20px 10px 10px 10px;
+     padding: 20px;
+     border: 1px solid #ccc;
+     text-align: center;
+   }
+
+   .answer-correct {
+     color: green;
+   }
+
+   .answer-incorrect {
+     color: red;
+   }
+ }
+ 

@@ -111,6 +111,18 @@ class WpStarterPlugin extends Singleton {
 				'pluginDirUrl'  => WP_STARTER_PLUGIN_URL,
 			)
 		);
+
+		register_block_type(
+			'wpstarterplugin/example-1',
+			array(
+				'api_version'     => 2,
+				'render_callback' => function( $attributes ) {
+					ob_start();
+					include WP_STARTER_PLUGIN_PATH . 'src/templates/blocks/example-1.php';
+					return ob_get_clean();
+				},
+			) 
+		);
 	}
 
 	/**

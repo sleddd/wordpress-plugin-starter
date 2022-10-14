@@ -188,8 +188,8 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/dist/js/backend": 0,
-/******/ 			"dist/css/frontend": 0,
 /******/ 			"dist/css/backend": 0,
+/******/ 			"dist/css/frontend": 0,
 /******/ 			"dist/css/blocks-editor": 0,
 /******/ 			"dist/css/blocks": 0
 /******/ 		};
@@ -241,13 +241,13 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["dist/css/frontend","dist/css/backend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/assets/js/backend.js")))
-/******/ 	__webpack_require__.O(undefined, ["dist/css/frontend","dist/css/backend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/assets/sass/frontend.scss")))
-/******/ 	__webpack_require__.O(undefined, ["dist/css/frontend","dist/css/backend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/assets/sass/backend.scss")))
-/******/ 	__webpack_require__.O(undefined, ["dist/css/frontend","dist/css/backend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/blocks/scss/blocks.scss")))
-/******/ 	__webpack_require__.O(undefined, ["dist/css/frontend","dist/css/backend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/blocks/scss/blocks-editor.scss")))
-/******/ 	__webpack_require__.O(undefined, ["dist/css/frontend","dist/css/backend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/assets/postcss/backend.pcss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["dist/css/frontend","dist/css/backend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/assets/postcss/frontend.pcss")))
+/******/ 	__webpack_require__.O(undefined, ["dist/css/backend","dist/css/frontend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/assets/js/backend.js")))
+/******/ 	__webpack_require__.O(undefined, ["dist/css/backend","dist/css/frontend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/assets/sass/frontend.scss")))
+/******/ 	__webpack_require__.O(undefined, ["dist/css/backend","dist/css/frontend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/assets/sass/backend.scss")))
+/******/ 	__webpack_require__.O(undefined, ["dist/css/backend","dist/css/frontend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/blocks/scss/blocks.scss")))
+/******/ 	__webpack_require__.O(undefined, ["dist/css/backend","dist/css/frontend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/blocks/scss/blocks-editor.scss")))
+/******/ 	__webpack_require__.O(undefined, ["dist/css/backend","dist/css/frontend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/assets/postcss/backend.pcss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["dist/css/backend","dist/css/frontend","dist/css/blocks-editor","dist/css/blocks"], () => (__webpack_require__("./src/assets/postcss/frontend.pcss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

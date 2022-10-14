@@ -1,0 +1,32 @@
+{
+	"name":"wpstarterplugin/example-1",
+	"title": "Multiple Choice Block",
+	"category": "theme",
+	"icon": "admin-comments",
+	"description": "Multiple Choice Question Block",
+	"keywords": ["example","question", "multiple choice"],
+	"version": "1.0",
+	"textdomain": "wpstarterplugin",
+	"attributes": {
+		"question": {
+			"type": "string",
+			"default": "Add a question"
+		},
+		"options": {
+			"type": "array",
+			"default": ["Add an answer"]
+		}, 
+		"answer": {
+			"type": "number",
+			"default": "-1"
+		}
+	},
+	"supports": {
+		"align": true,
+		"inserter": true
+	},
+	"styles": [
+	    { "name": "default", "label": "Default", "isDefault": true },
+	    { "name": "other", "label": "Other" }
+	]
+    }

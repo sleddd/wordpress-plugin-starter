@@ -26,9 +26,8 @@ mix
   })
   .purgeCss()
   .js(basePath + "js/backend.js", "dist/js/backend.js")
-  .js(basePath + "js/frontend.js", "dist/js/frontend.js")
-  .js(blocksBasePath + "*.js", "dist/js/blocks.js")
-  .react()
+  .js(basePath + "js/frontend.js", "dist/js/frontend.js").react()
+  .js(blocksBasePath + "*.js", "dist/js/blocks.js").react()
   //.ts( blocksBasePath + '*.tsx', 'dist/js/blocks.js')
   .sass(basePath + "sass/frontend.scss", "dist/css/frontend.css", {
     sassOptions: {

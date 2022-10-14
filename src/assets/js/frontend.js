@@ -1,17 +1,22 @@
-/**
- * SASS
- */
-import '../sass/frontend.scss';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { ExampleOneQuestion } from './components/ExampleOneQuestion';
 
 /**
  * JavaScript
  */
 
-// (function ($) {
-// 	// jQuery document ready
-// 	console.log('test');
-// })(jQuery);
+/* jQuery
+(function ($) {
+	// jQuery document ready
+	console.log('test');
+})(jQuery); */
+
+// Vanilla JS.
 ( function() {
-	// Vanilla JS Document Ready
-	console.log( 'frontend scripts' );
+	const questions = document.querySelectorAll( '.question-container' );
+	questions.forEach( function( div ) {
+		const data = JSON.parse( div.querySelector( 'pre' ).innerText );
+		ReactDOM.render( <ExampleOneQuestion { ...data } />, div );
+	} );
 }() );

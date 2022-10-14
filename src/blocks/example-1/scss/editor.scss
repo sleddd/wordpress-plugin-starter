@@ -1,0 +1,32 @@
+.wp-admin {
+  .example-1 {
+    background: #ededed;
+    border: 1px solid #ccc;
+    padding: 20px;
+
+    .question {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 1rem;
+      margin: 1rem auto 1rem auto;
+    }
+
+    .answers {
+      p {
+        font-size: 13px;
+        margin: 0;
+      }
+
+      .mark-answer-correct {
+        color: #eccc68
+      }
+
+      .delete-answer {
+        color: #ff6348;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
