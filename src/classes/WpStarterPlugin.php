@@ -42,11 +42,6 @@ class WpStarterPlugin extends Singleton {
 				return false;
 			}
 		);
-
-		// Set up apis for user in plugin or theme.
-		$plugin::init_api();
-
-		return $plugin;
 	}
 
 	/**
@@ -58,18 +53,6 @@ class WpStarterPlugin extends Singleton {
 	 * Manages tasks done on plugin deactivation.
 	 */
 	public static function deactivate_plugin() {}
-
-	/* Add a static api endpoint - only for API endpoints that do change */
-	private static function init_api() {
-		self::$TEST_API = new API(
-			'placeholder_test',
-			'https://jsonplaceholder.typicode.com/todos',
-			false,
-			false,
-			true,
-			0
-		);
-	}
 
 	/**
 	 * Registration for custom settings pages.

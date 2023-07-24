@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
+<config name="installed_paths" value="./vendor/wp-coding-standards/wpcs" />
 <ruleset name="WordPress Coding Standards for Plugins">
 	<description>Generally-applicable sniffs for WordPress plugins</description>
 
 	<rule ref="WordPress-Extra" />
 	<rule ref="WordPress-Docs" />
-	<rule ref="WordPress-VIP-Go" />
+	<rule tref="WordPress-VIP-Go" />
 
 	<!--
 	<config name="minimum_supported_wp_version" value="4.6"/>
@@ -29,16 +30,19 @@
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
 	</rule>
 
-	<rule ref="PHPCompatibilityWP"/>
-	<config name="testVersion" value="7.2-"/>
+	<arg value="psv"/>
 
-	<arg name="extensions" value="php"/>
+    <!-- Strip the filepaths down to the relevant bit. -->
+    <arg name="basepath" value="./"/>
 
-	<!-- Show sniff codes in all reports -->
-	<arg value="s"/>
+    <!-- Check up to 8 files simultanously. -->
+    <arg name="parallel" value="8"/>
 
-	<!-- Allow invoking just `phpcs` on command line without assuming STDIN for file input. -->
-	<file>.</file>
+    <!-- Only check the PHP files. JS files are checked separately with JSCS and JSHint. -->
+    <arg name="extensions" value="php"/>
+
+    <!-- Check all files in this directory and the directories below it. -->
+    <file>.</file>
 
     <exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>

@@ -34,25 +34,6 @@ With Composer and Node installed, from the plugin directory, at command line run
 
 To see how to add a custom post type, review the example: src/classes/PostTypes/ExamplePostType.php
 
-This plugin does support ACF through composer. To use ACF, you will need to update the composer.json to include the following lines: 
-
-```
-files: [
-	"vendor/advanced-custom-fields/advanced-custom-fields-pro/acf.php",
-	"vendor/advanced-custom-fields/advanced-custom-fields-pro/pro/acf-pro.php"
-]
-
-"require": {
-	"advanced-custom-fields/advanced-custom-fields-pro": "*"
-}
-```
-
-You will also need to add a .env file and fields for: 
-```
-PLUGIN_ACF_KEY=YOURKEY
-VERSION=5.11.4
-```
-
 To add custom settings or options pages see examples:
 ```
 /src/classes/Settings/ExampleACFSettingsPage.php
@@ -60,40 +41,7 @@ To add custom settings or options pages see examples:
 /src/classes/Settings/ExampleSettingsSubPage.php
 ```
 
-------------
-API REQUESTS
-
-API requests make use of the base API class. Depending on how you set it up, it also lets you reuse endpoints throughout the plugin or theme quickly and easily. There is an example built into the main plugin init file where the test API is added as a static property to hold the API instance and then initialized in the init_api method with the API Base class.
-
-API Base class instance
-
-```
-new API(
-    'yourendpoint_name',
-    'https://yourendpoint',
-    false, // Auth token for Basic Auth 
-    false, // args 
-    false, // show errors
-    true, // cache - a transient
-    0 // timeout in minutes
-);
-```
-
-Below shows how to use it after it has been instanced via base class. The example uses the main plugin instance of the test api: 
-
-To access directly via namespace in longform:\
-WpStarterPlugin\WpStarterPlugin::$instance::$TEST_API->remote_get();
-
-Stored in a variable:\
-$wp_starter_plugin = \WpStarterPlugin\WpStarterPlugin::$instance;
-
-Access transient directly:\
-get_transient($wp_starter_plugin::$TEST_API->name);
-
-Bypass transient to request a different endpoint or variation:\
-$wp_starter_plugin::$TEST_API->cache = false; \
-$wp_starter_plugin::$TEST_API->url = $wp_starter_plugin::$TEST_API->url . '/1'; \
-$wp_starter_plugin::$TEST_API->remote_get();
+Note: You will need the ACF plugin if you implement the ACF settings page.
 
 ----------------
 GUTENBERG BLOCKS 

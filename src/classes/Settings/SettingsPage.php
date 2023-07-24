@@ -220,7 +220,7 @@ class SettingsPage {
 					echo '<div class="fieldset">';
 					$options_count = 1;
 					foreach ( $field['options'] as $field_option ) {
-						$checked = is_array( $option ) && $option[ $options_count ] === $field_option['value'] ? 'checked="checked"' : '';
+						$checked = is_array( $option ) && isset( $option[ $options_count ] ) && $option[ $options_count ] === $field_option['value'] ? 'checked="checked"' : '';
 						echo '<label for="' . esc_attr( $field['id'] ) . '">' . wp_kses_post( $field_option['label'] ) . '</label><input type="checkbox" name="' . esc_attr( $field['id'] ) . '[' . (int) $options_count . ']" id="' . esc_attr( $field['id'] ) . '[' . (int) $options_count . ']" value="' . esc_attr( $field_option['value'] ) . '"' . $checked . '/>';
 						$options_count++;
 					}

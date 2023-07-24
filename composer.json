@@ -11,42 +11,24 @@
 		{
 			"type": "composer",
 			"url": "https://wpackagist.org"
-		},
-		{
-			"type": "package",
-			"package": {
-			  "name": "advanced-custom-fields/advanced-custom-fields-pro",
-			  "version": "5.11.4",
-			  "type": "wordpress-plugin",
-			  "dist": {
-			    "type": "zip",
-			    "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%PLUGIN_ACF_KEY}&t={%VERSION}"
-			  },
-			  "require": {
-			    "ffraenz/private-composer-installer": "^5.0"
-			  }
-			}
-		      }
+		}
         ],
         "extra": {
                 "installer-paths": {
-                        "vendor/{$name}/": [
+                        "../{$name}/": [
                                 "type:wordpress-plugin"
                         ]
                 }
         },
         "require": {
-                "composer/installers": "~2.0",
-		"joshtronic/php-loremipsum": "^2.1"
+                "composer/installers": "*"
         },
         "require-dev": {
-                "brainmaestro/composer-git-hooks": "^2.6",
-		"automattic/vipwpcs": "^2.0.0",
+                "squizlabs/php_codesniffer": "*",
+		"automattic/vipwpcs": "*",
 		"wp-coding-standards/wpcs": "*",
-		"dealerdirect/phpcodesniffer-composer-installer": "^0.7",
 		"phpcompatibility/phpcompatibility-wp": "*",
-		"yoast/phpunit-polyfills": "^1.0",
-		"phpunit/phpunit": "^7.0"
+		"phpunit/phpunit": "*"
         },
         "autoload": {
                 "psr-4": {
@@ -62,8 +44,8 @@
         },
         "config": {
                 "allow-plugins": {
-                        "dealerdirect/phpcodesniffer-composer-installer": true,
-                        "composer/installers": true
+                        "composer/installers": true,
+                        "dealerdirect/phpcodesniffer-composer-installer" : true
                 }
         }
 }

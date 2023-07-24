@@ -17,32 +17,40 @@ function get_post_type_args( $name = '', $args = array(), $labels = array() ) {
 
 	$labels = array_merge(
 		array(
-			'name'               => _x( $plural, 'post type general name' ),
-			'singular_name'      => _x( $name, 'post type singular name' ),
-			'add_new'            => _x( 'Add New', strtolower( $name ) ),
-			'add_new_item'       => __( 'Add New ' . $name ),
-			'edit_item'          => __( 'Edit ' . $name ),
-			'new_item'           => __( 'New ' . $name ),
-			'all_items'          => __( 'All ' . $plural ),
-			'view_item'          => __( 'View ' . $name ),
-			'search_items'       => __( 'Search ' . $plural ),
-			'not_found'          => __( 'No ' . strtolower( $plural ) . ' found' ),
-			'not_found_in_trash' => __( 'No ' . strtolower( $plural ) . ' found in Trash' ),
+			'name'               => __( $plural, 'wpstarterplugin' ),
+			'singular_name'      => __( $name, 'wpstarterplugin' ),
+			'add_new'            => __( 'Add New ' . ucwords( strtolower( $name ) ), 'wpstarterplugin' ),
+			'add_new_item'       => __( 'Add New ' . $name, 'wpstarterplugin' ),
+			'edit_item'          => __( 'Edit ' . $name, 'wpstarterplugin'  ),
+			'new_item'           => __( 'New ' . $name, 'wpstarterplugin'  ),
+			'all_items'          => __( 'All ' . $plural, 'wpstarterplugin'  ),
+			'view_item'          => __( 'View ' . $name, 'wpstarterplugin' ),
+			'search_items'       => __( 'Search ' . $plural, 'wpstarterplugin'  ),
+			'not_found'          => __( 'No ' . strtolower( $plural ) . ' found', 'wpstarterplugin'  ),
+			'not_found_in_trash' => __( 'No ' . strtolower( $plural ) . ' found in Trash', 'wpstarterplugin'  ),
 			'parent_item_colon'  => '',
-			'menu_name'          => $plural,
+			'menu_name'          => __( $plural, 'wpstarterplugin' )
 		),
 		$labels
 	);
 
 	$args = array_merge(
 		array(
-			'label'             => $plural,
-			'labels'            => $labels,
-			'public'            => true,
-			'show_ui'           => true,
-			'supports'          => array( 'title', 'editor' ),
-			'show_in_nav_menus' => true,
-			'_builtin'          => false,
+			'label'             	=> $plural,
+			'labels'            	=> $labels,
+			'public'				=> true,
+			'publicly_queryable'	=> true,
+			'supports' 				=> array(
+				'title',
+				'editor',
+				'excerpt',
+				'thumbnail'
+			),
+			'show_ui'				=> true,
+			'show_in_rest'			=> true,
+			'show_in_menu'			=> true,
+			'show_in_nav_menus'     => true,
+			'has_archive'			=> true
 		),
 		$args
 	);
@@ -69,29 +77,30 @@ function get_taxonomy_args( $name = '', $args = array(), $labels = array() ) {
 
 	$labels = array_merge(
 		array(
-			'name'              => _x( $plural, 'taxonomy general name' ),
-			'singular_name'     => _x( $name, 'taxonomy singular name' ),
-			'search_items'      => __( 'Search ' . $plural ),
-			'all_items'         => __( 'All ' . $plural ),
-			'parent_item'       => __( 'Parent ' . $name ),
-			'parent_item_colon' => __( 'Parent ' . $name . ':' ),
-			'edit_item'         => __( 'Edit ' . $name ),
-			'update_item'       => __( 'Update ' . $name ),
-			'add_new_item'      => __( 'Add New ' . $name ),
-			'new_item_name'     => __( 'New ' . $name . ' Name' ),
-			'menu_name'         => __( $name ),
+			'name'              => _x( $plural, ' wpstarterplugin' ),
+			'singular_name'     => _x( $name, ' wpstarterplugin' ),
+			'search_items'      => __( 'Search ' . $plural,  ' wpstarterplugin' ),
+			'all_items'         => __( 'All ' . $plural, 'wpstarterplugin' ),
+			'parent_item'       => __( 'Parent ' . $name, 'wpstarterplugin' ),
+			'parent_item_colon' => __( 'Parent ' . $name . ':', 'wpstarterplugin' ),
+			'edit_item'         => __( 'Edit ' . $name, 'wpstarterplugin' ),
+			'update_item'       => __( 'Update ' . $name, 'wpstarterplugin' ),
+			'add_new_item'      => __( 'Add New ' . $name, 'wpstarterplugin' ),
+			'new_item_name'     => __( 'New ' . $name . ' Name', 'wpstarterplugin' ),
+			'menu_name'         => __( $name, 'wpstarterplugin' )
 		),
 		$labels
 	);
 
 	$args = array_merge(
 		array(
-			'label'             => $plural,
-			'labels'            => $labels,
-			'public'            => true,
-			'show_ui'           => true,
-			'show_in_nav_menus' => true,
-			'_builtin'          => false,
+			'hierarchical'      	=> false,
+			'public'				=> true,
+			'labels'            	=> $labels,
+			'show_ui'           	=> true,
+			'show_admin_column' 	=> true,
+			'show_in_rest'      	=> true,
+			'show_tagcloud'			=> true,		
 		),
 		$args
 	);
@@ -119,6 +128,8 @@ function register_post_type( $post_type_name = '', $args = array(), $labels = ar
 		'init',
 		function() use ( $post_type_name, $args ) {
 			\register_post_type( $post_type_name, $args );
+			// Flush rewrites to ensure it will pull the right Gutenberg template.
+			flush_rewrite_rules();
 		}
 	);
 }
@@ -148,7 +159,7 @@ function add_taxonomy( $taxonomy_name = '', $post_type_name = '', $args = array(
 		add_action(
 			'init',
 			function() use ( $taxonomy_name, $post_type_name, $args ) {
-				 \register_taxonomy( $taxonomy_name, $post_type_name, $args );
+				 \register_taxonomy( strtolower( $taxonomy_name ), $post_type_name, $args );
 			}
 		);
 	} else {
@@ -156,7 +167,7 @@ function add_taxonomy( $taxonomy_name = '', $post_type_name = '', $args = array(
 		add_action(
 			'init',
 			function() use ( $taxonomy_name, $post_type_name ) {
-				\register_taxonomy_for_object_type( $taxonomy_name, $post_type_name );
+				\register_taxonomy_for_object_type( strtolower( $taxonomy_name ), $post_type_name );
 			}
 		);
 	}
@@ -166,14 +177,15 @@ function add_taxonomy( $taxonomy_name = '', $post_type_name = '', $args = array(
 /**
  * Adds a meta box to a post type.
  *
- * @param   string $title     Title for meta box.
- * @param   array  $fields    Optional. Metabox fields properties.
- * @param   string $context   Optional. Where the metabox is displayed ( normal, side, advanced ).
- * @param   string $priority  Optional. Where in the context the metabox shows (high, core, default, low).
+ * @param   string $title     		Title for meta box.
+ * @param   string $meta_prefix		Optional. Prefix for the meta box ids. ( i.e. example_book_cpt_title, example_book_cpt_author)
+ * @param   array  $fields    		Optional. Metabox fields properties.
+ * @param   string $context   		Optional. Where the metabox is displayed ( normal, side, advanced ).
+ * @param   string $priority  		Optional. Where in the context the metabox shows (high, core, default, low).
  * @param   string $post_type_name  Name of post type.
  * @return  void
  */
-function add_meta_box( $title = '', $fields = array(), $context = 'normal', $priority = 'default', $post_type_name = '' ) {
+function add_meta_box( $title = '', $meta_prefix = null, $fields = array(), $context = 'normal', $priority = 'default', $post_type_name = '' ) {
 
 	if ( empty( $title ) || empty( $post_type_name ) ) {
 		return;
@@ -181,15 +193,14 @@ function add_meta_box( $title = '', $fields = array(), $context = 'normal', $pri
 
 	if ( ! empty( $title ) ) {
 
-		$post_type_name = strtolower( str_replace( '_', ' ', $post_type_name ) );
-
-		$box_id       = strtolower( str_replace( ' ', '_', $title ) );
-		$box_title    = ucwords( str_replace( '_', ' ', $title ) );
-		$box_context  = $context;
-		$box_priority = $priority;
+		$post_type_name	= strtolower( str_replace( '_', ' ', $post_type_name ) );
+		$box_id       	= empty( $meta_prefix ) ? strtolower( str_replace( ' ', '_', $title ) ) : $meta_prefix;
+		$box_title   	= ucwords( str_replace( '_', ' ', $title ) );
+		$box_context  	= $context;
+		$box_priority 	= $priority;
 
 		global $custom_fields;
-		$custom_fields[ $title ] = $fields;
+		$custom_fields[ $box_id ] = $fields;
 
 		add_action(
 			'admin_init',
@@ -217,13 +228,15 @@ function add_meta_box( $title = '', $fields = array(), $context = 'normal', $pri
 								$field_id_name = strtolower( str_replace( ' ', '_', $data['id'] ) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
 								switch ( $field['type'] ) {
 									case 'text':
-										echo '<label for="' . $field_id_name . '">' . $label . '</label><input type="text" name="' . $field_id_name . '" id="' . $field_id_name . '" value="' . $meta[ $field_id_name ][0] . '" />';
+										$value = is_array( $meta ) && array_key_exists( $field_id_name, $meta ) ? $meta[ $field_id_name ][0] : '';
+										echo '<label for="' . $field_id_name . '">' . $label . '</label><input type="text" name="' . $field_id_name . '" id="' . $field_id_name . '" value="' . wp_kses_post( $value ) . '" />';
 										if ( array_key_exists( 'desc', $field ) ) {
 											echo '<span class="description">' . $field['desc'] . '</span>';
 										}
 										break;
 									case 'textarea':
-										echo '<label for="' . $field_id_name . '">' . $label . '</label><textarea name="' . $field_id_name . '" id="' . $field_id_name . '">' . $meta[ $field_id_name ][0] . '</textarea>';
+										$value = is_array( $meta ) && array_key_exists( $field_id_name, $meta ) ? $meta[ $field_id_name ][0] : '';
+										echo '<label for="' . $field_id_name . '">' . $label . '</label><textarea name="' . $field_id_name . '" id="' . $field_id_name . '">' . wp_kses_post( $value ) . '</textarea>';
 										if ( array_key_exists( 'desc', $field ) ) {
 											echo '<span class="description">' . $field['desc'] . '</span>';
 										}
@@ -232,10 +245,10 @@ function add_meta_box( $title = '', $fields = array(), $context = 'normal', $pri
 										echo '<label for="' . $field_id_name . '">' . $label . '</label>';
 										if ( array_key_exists( 'options', $field ) ) {
 											$options_count = 0;
-											$saved_options = maybe_unserialize( $meta[ $field_id_name ][0] );
+											$saved_options = is_array( $meta ) && array_key_exists( $field_id_name, $meta ) ? maybe_unserialize( $meta[ $field_id_name ][0] ) : [];
 											echo '<div class="fieldset">';
 											foreach ( $field['options'] as $label => $value ) {
-												$checked = $saved_options[ $options_count ] === $value ? 'checked="checked"' : '';
+												$checked = ! empty( $saved_options ) && isset( $saved_options[ $options_count ] ) && $saved_options[ $options_count ] === $value ? 'checked="checked"' : '';
 												echo '<label for="' . $field_id_name . '">' . $label . '</label><input type="checkbox" name="' . $field_id_name . '[' . $options_count . ']" id="' . $field_id_name . '" value="' . $value . '"' . $checked . '/>';
 												$options_count++;
 											}
@@ -249,7 +262,7 @@ function add_meta_box( $title = '', $fields = array(), $context = 'normal', $pri
 										echo '<label for="' . $field_id_name . '">' . $label . '</label>';
 										echo '<div class="fieldset">';
 										foreach ( $field['options'] as $label => $value ) {
-											$checked = $meta[ $field_id_name ][0] === $value ? 'checked="checked"' : '';
+											$checked =  is_array( $meta ) && array_key_exists( $field_id_name, $meta ) && $meta[ $field_id_name ][0] === $value ? 'checked="checked"' : '';
 											echo '<label for="' . $field_id_name . '">' . $label . '</label><input type="radio" name="' . $field_id_name . '" id="' . $field_id_name . '" value="' . $value . '"' . $checked . '/>';
 										}
 										echo '</div>';
@@ -261,7 +274,8 @@ function add_meta_box( $title = '', $fields = array(), $context = 'normal', $pri
 										echo '<label for="' . $field_id_name . '">' . $label . '</label>';
 										echo '<select name="' . $field_id_name . '" id="' . $field_id_name . '">';
 										foreach ( $field['options'] as $label => $value ) {
-											echo '<option', $meta[ $field_id_name ][0] == $value ? ' selected="selected"' : '', ' value="' . $value . '">' . $label . '</option>';
+											$selected =  is_array( $meta ) && array_key_exists( $field_id_name, $meta ) && $meta[ $field_id_name ][0] == $value ? 'selected="selected"' : '';
+											echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
 										}
 										echo '</select>';
 										if ( array_key_exists( 'desc', $field ) ) {
@@ -290,24 +304,25 @@ function add_meta_box( $title = '', $fields = array(), $context = 'normal', $pri
 					return;
 				}
 
-				if ( ! wp_verify_nonce( $_POST['custom_post_type'], plugin_basename( __FILE__ ) ) ) {
+				if ( ! isset( $_POST['custom_post_type'] ) || ! wp_verify_nonce( $_POST['custom_post_type'], plugin_basename( __FILE__ ) ) ) {
 					return;
 				}
 
-				 global $post;
+				global $post;
 
 				if ( isset( $_POST ) && isset( $post->ID ) && get_post_type( $post->ID ) == $post_type_name ) {
 					global $custom_fields;
 
 					// Loop through each meta box
 					foreach ( $custom_fields as $title => $fields ) {
+
 						// Loop through all fields
 						foreach ( $fields as $label => $type ) {
 							$field_id_name = strtolower( str_replace( ' ', '_', $title ) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
-							$old           = get_post_meta( $post_id, $field_id_name, true );
+							$old           = get_post_meta( $post->ID, $field_id_name, true );
 							$new           = $_POST[ $field_id_name ];
 							if ( '' == $new && $old ) {
-								delete_post_meta( $post_id, $field_id_name, $_POST[ $field_id_name ] );
+								delete_post_meta( $post->ID, $field_id_name, $_POST[ $field_id_name ] );
 							} else {
 								update_post_meta( $post->ID, $field_id_name, $_POST[ $field_id_name ] );
 							}

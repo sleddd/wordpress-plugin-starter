@@ -8,9 +8,7 @@ use WpStarterPlugin\Base\Singleton;
  * Provides example of how to add a custom post type.
  * Uses /src/lib/postTypes.php functions.
  */
-class ExamplePostType extends Singleton {
-
-	/**
+class ExamplePostType extends Singleton {/**
 	 * Declares post type and taxonomy names.
 	 */
 	const POST_TYPE_NAME = 'Example';
@@ -33,6 +31,7 @@ class ExamplePostType extends Singleton {
 	public static function add_post_type_custom_fields() {
 		add_meta_box(
 			'Example - Book Information',
+			'book_cpt',
 			array(
 				'Title'        => array(
 					'type' => 'text',
