@@ -32,3 +32,6 @@ node_modules/
 # Ignore Mac DS_Store files
 .DS_Store
 /vendor
+!vendor/composer
+!vendor/phpunit
+!vendor/myclabs
