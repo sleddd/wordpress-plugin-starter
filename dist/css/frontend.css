@@ -1,3 +1,6 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[9].use[0]!./src/assets/scss/frontend.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /**
 * Importing by selector filtering example
 * https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-magic-importer#selector-filtering
@@ -5,47 +8,29 @@
 .util-color-red {
   color: red;
 }
+
 .util-color-blue {
   color: blue;
 }
+
 .util--normalized {
   font-size: 2px;
 }
+
 /**
 * Importing by glob example
 * https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-magic-importer#globbing
- */
+*/
 .component-1-from-example-1 {
   padding: 1px;
 }
-.component-1-from-example-2 {
-  padding: 1px;
-}
-.component-2-from-example-2 {
-  padding: 1px;
-}
-/**
-Postcss-import feature example
- */
-.component-1-from-example-1 {
-  padding: 1px;
-}
-.component-1-from-example-2 {
-  padding: 1px;
-}
-.component-2-from-example-2 {
-  padding: 1px;
-}
-.test {
-  color: red;
-  /**
-    Postcss-nested feature example
-     */
-  &__blue {
-    color: blue;
-  }
 
-  &__yellow {
-    color: yellow;
-  }
+.component-1-from-example-2 {
+  padding: 1px;
 }
+
+.component-2-from-example-2 {
+  padding: 1px;
+}
+
+/*# sourceMappingURL=frontend.css.map*/

@@ -2,6 +2,7 @@
 * Importing by selector filtering example
 * https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-magic-importer#selector-filtering
  */
+ 
 @import '{ .util-color-red, .util-color-blue } from utils/_example-1.scss';
 
 @import '{ .util-with-weird-name as .util--normalized } from utils/_example-2.scss';
@@ -9,5 +10,6 @@
 /**
 * Importing by glob example
 * https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-magic-importer#globbing
- */
-@import 'components/**/*.scss';
+*/
+ 
+@import 'components/*.scss';

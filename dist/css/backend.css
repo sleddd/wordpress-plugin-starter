@@ -1,9 +1,13 @@
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[9].use[0]!./src/assets/scss/backend.scss ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************/
 .wp_starter_plugin_custom_meta label,
 .wp_starter_plugin_settings label {
   display: block;
   width: 100%;
   margin-top: 1.1rem;
 }
+
 .wp_starter_plugin_custom_meta input,
 .wp_starter_plugin_custom_meta textarea,
 .wp_starter_plugin_custom_meta select,
@@ -12,6 +16,7 @@
 .wp_starter_plugin_settings select {
   margin: 0.5rem auto 0 auto;
 }
+
 .wp_starter_plugin_custom_meta input[type=text],
 .wp_starter_plugin_custom_meta textarea,
 .wp_starter_plugin_custom_meta select,
@@ -20,22 +25,26 @@
 .wp_starter_plugin_settings select {
   width: 100%;
 }
+
 .wp_starter_plugin_custom_meta input[type=radio],
 .wp_starter_plugin_custom_meta input[type=checkbox],
 .wp_starter_plugin_settings input[type=radio],
 .wp_starter_plugin_settings input[type=checkbox] {
   margin: -2px 0.5rem 0 0.3rem;
 }
+
 .wp_starter_plugin_custom_meta .fieldset,
 .wp_starter_plugin_settings .fieldset {
   width: 100%;
 }
+
 .wp_starter_plugin_custom_meta .fieldset label,
 .wp_starter_plugin_settings .fieldset label {
   display: inline;
   width: auto;
   margin-top: 0;
 }
+
 .wp_starter_plugin_custom_meta .description,
 .wp_starter_plugin_settings .description {
   width: 100%;
@@ -45,6 +54,7 @@
   margin: 0.4rem auto 0.5rem auto;
   color: #888;
 }
+
 .wp_starter_plugin_settings__section {
   background: #fff;
   width: 100%;
@@ -53,12 +63,15 @@
   padding: 0.5rem 1.5rem 1.5rem 1.5rem;
   border-radius: 3px;
 }
+
 .wp_starter_plugin_settings .fieldset {
   margin: 0.7rem auto 1rem auto;
 }
+
 .wp_starter_plugin_settings input,
 .wp_starter_plugin_settings textarea,
 .wp_starter_plugin_settings select {
   margin-bottom: 0.5rem;
 }
 
+/*# sourceMappingURL=backend.css.map*/

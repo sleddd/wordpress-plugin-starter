@@ -1,14 +1,11 @@
 <?php namespace WpStarterPlugin;
 
 use WpStarterPlugin\Base\Singleton;
-use WpStarterPlugin\Base\API;
 
 /**
  * Manages plugin initialization.
  */
 class WpStarterPlugin extends Singleton {
-
-	public static $TEST_API = array();
 
 	/**
 	 * Registers any needed WordPress hooks, actions, filters.
@@ -24,10 +21,10 @@ class WpStarterPlugin extends Singleton {
 		$plugin::register_cpts();
 
 		// Register custom blocks.
-		add_action( 'init', array( __NAMESPACE__ . '\\WpStarterPlugin', 'register_blocks' ) );
+		$plugin::register_blocks();
 
 		// Enqueue scripts and styles.
-		add_action( 'wp_enqueue_styles', array( __NAMESPACE__ . '\\WpStarterPlugin', 'enqueue_frontend_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( __NAMESPACE__ . '\\WpStarterPlugin', 'enqueue_frontend_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( __NAMESPACE__ . '\\WpStarterPlugin', 'enqueue_frontend_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __NAMESPACE__ . '\\WpStarterPlugin', 'enqueue_backend_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __NAMESPACE__ . '\\WpStarterPlugin', 'enqueue_backend_styles' ) );
@@ -42,6 +39,8 @@ class WpStarterPlugin extends Singleton {
 				return false;
 			}
 		);
+
+		return $plugin;
 	}
 
 	/**
@@ -75,46 +74,39 @@ class WpStarterPlugin extends Singleton {
 	 * Blocks themselves are registered in scripts.
 	 */
 	public static function register_blocks() {
-		wp_enqueue_style(
-			'wpstarterplugin-blockcss',
-			WP_STARTER_PLUGIN_URL . 'dist/css/blocks.css'
+		// Register blocks in the format $dir => $render_callback.
+		$blocks = array(
+			'hello-world' => ''		
 		);
-		wp_enqueue_script(
-			'wpstarterplugin-blockjs',
-			WP_STARTER_PLUGIN_URL . 'dist/js/blocks.js',
-			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components' ),
-			null,
-			true
-		);
-		wp_localize_script(
-			'wpstarterplugin-blockjs',
-			'wpstarterplugin',
-			array(
-				'pluginDirPath' => WP_STARTER_PLUGIN_PATH,
-				'pluginDirUrl'  => WP_STARTER_PLUGIN_URL,
-			)
-		);
+
+		foreach ( $blocks as $dir => $render_callback ) {
+			$args = array();
+			if ( ! empty( $render_callback ) ) {
+				$args['render_callback'] = $render_callback;
+			}
+			register_block_type( WP_STARTER_PLUGIN_PATH . 'dist/blocks/' . $dir, $args );
+		}
 	}
 
 	/**
 	 * Registration for frontend plugin styles.
 	 */
 	public static function enqueue_frontend_styles() {
-		wp_enqueue_style( 'wpstarterplugin-styles', WP_STARTER_PLUGIN_URL . 'dist/css/frontend.css', wp_rand(), false, 'all' );
+		wp_enqueue_style( 'wpstarterplugin-frontend-styles', WP_STARTER_PLUGIN_URL . 'dist/css/frontend.css', wp_rand(), false, 'all' );
 	}
 
 	/**
 	 * Registration for backend styles.
 	 */
 	public static function enqueue_backend_styles() {
-		wp_enqueue_style( 'wpstarterplugin-styles', WP_STARTER_PLUGIN_URL . 'dist/css/backend.css', wp_rand(), false, 'all' );
+		wp_enqueue_style( 'wpstarterplugin-backend-styles', WP_STARTER_PLUGIN_URL . 'dist/css/backend.css', wp_rand(), false, 'all' );
 	}
 
 	/**
 	 * Registration for frontend scripts and script localization.
 	 */
 	public static function enqueue_frontend_scripts() {
-		 wp_enqueue_script( 'wpstarterplugin-scripts', WP_STARTER_PLUGIN_URL . 'dist/js/frontend.js', 'jquery', wp_rand(), true );
+		wp_enqueue_script( 'wpstarterplugin-frontend-scripts', WP_STARTER_PLUGIN_URL . 'dist/js/frontend.js', 'jquery', wp_rand(), true );
 		wp_localize_script(
 			'wpstarterplugin-frontend-scripts',
 			'wpstarterplugin',
@@ -129,7 +121,7 @@ class WpStarterPlugin extends Singleton {
 	 * Registration for backend scripts.
 	 */
 	public static function enqueue_backend_scripts() {
-		wp_enqueue_script( 'wpstarterplugin-scripts', WP_STARTER_PLUGIN_URL . 'dist/js/backend.js', 'jquery', rand(), true );
+		wp_enqueue_script( 'wpstarterplugin-backend-scripts', WP_STARTER_PLUGIN_URL . 'dist/js/backend.js', 'jquery', rand(), true );
 		wp_localize_script(
 			'wpstarterplugin-backend-scripts',
 			'wpstarterplugin',

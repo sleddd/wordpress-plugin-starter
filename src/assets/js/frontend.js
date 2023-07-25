@@ -1,9 +1,4 @@
 /**
- * SASS
- */
-import '../sass/frontend.scss';
-
-/**
  * JavaScript
  */
 

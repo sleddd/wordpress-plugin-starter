@@ -20,4 +20,3 @@ require WP_STARTER_PLUGIN_PATH . 'vendor/autoload.php';
 
 /* Initializing plugin */
 $wp_starter_plugin = \WpStarterPlugin\WpStarterPlugin::init();
-

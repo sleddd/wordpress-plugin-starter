@@ -1,26 +1,25 @@
 {
-	"name":"wpstarterplugin/hello-world",
-	"title": "Hello World",
-	"category": "text",
-	"icon": "admin-comments",
-	"description": "Hello World block.",
-	"keywords": ["hello","world"],
-	"version": "1.0",
-	"textdomain": "wpstarterplugin",
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wpstarterplugin/hello-world",
+	"version": "0.1.0",
+	"title": "Hello World - Example",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Hello World - Example",
+	"supports": {
+		"html": false
+	},
 	"attributes": {
-		"title": {
-			"type": "string"
-		},
-		"subtitle": {
-			"type": "string"
+		"textField": {
+			"type": "string",
+			"default": "Hello World"
 		}
 	},
-	"supports": {
-		"align": true,
-		"inserter": true
-	},
-	"styles": [
-	    { "name": "default", "label": "Default", "isDefault": true },
-	    { "name": "other", "label": "Other" }
-	]
-    }
+	"example": {},
+	"textdomain": "wpstarterplugin",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}
