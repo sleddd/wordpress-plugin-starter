@@ -6,18 +6,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 WordPress plugin starter code for easier development.
 
 ![Composer](https://img.shields.io/badge/Composer-brightgreen)
-![Node 14.17.0](https://img.shields.io/badge/Node-14.17.0-brightgreen)
-![WebPack 5.74.0](https://img.shields.io/badge/WebPack-5.74.0-brightgreen)
-![Babel 7.18.3](https://img.shields.io/badge/Babel-7.18.3-brightgreen)
-![PostCSS](https://img.shields.io/badge/PostCSS-brightgreen)
-![PurgeCSS](https://img.shields.io/badge/PurgeCSS-brightgreen)
+![Node](https://img.shields.io/badge/Node-brightgreen)
+![WebPack](https://img.shields.io/badge/WebPack-brightgreen)
 
-This plugin uses Laravel Mix to help transpile code for CSS and Javascript. Laravel Mix can be extended to cover almost all of your transpiling needs. You can find full documentation online at: 
-
-[Laravel Mix - What is mix? - https://laravel-mix.com/docs/6.0/what-is-mix](https://laravel-mix.com/docs/6.0/what-is-mix) \
-[Laravel Mix - React/Vue/Typescript Support - https://laravel-mix.com/docs/4.0/mixjs](https://laravel-mix.com/docs/4.0/mixjs) \
-[Laravel Mix - TailWind Support - https://laravel-mix.com/extensions/tailwind](https://laravel-mix.com/extensions/tailwind) \
-[Laravel Mix - Postcss Support - https://laravel-mix.com/docs/6.0/postcss](https://laravel-mix.com/docs/6.0/postcss) 
+This plugin uses WordPress wp-scripts to transpile blocks with a custom webpack config override to compile additional js and css. 
 
 ---
 ### Basic Installation
@@ -27,7 +19,7 @@ This plugin uses Laravel Mix to help transpile code for CSS and Javascript. Lara
 With Composer and Node installed, from the plugin directory, at command line run: 
 - composer install
 - npm install
-- npm run dev 
+- npm run start
 
 ---
 ### Additional Notes
@@ -46,7 +38,7 @@ Note: You will need the ACF plugin if you implement the ACF settings page.
 ----------------
 GUTENBERG BLOCKS 
 
-Gutenberg blocks can be registered in JavaScript. See hello-world block as an example: src/blocks/hello-world
+See hello-world block as an example: src/blocks/hello-world
 
 ------------------
 MAKING IT YOUR OWN
