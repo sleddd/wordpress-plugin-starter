@@ -1,0 +1,76 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+ .wpstarterplugin-single-post-query {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	gap: 12px;
+	background-color: #fff;
+	color: #5d6461;
+	padding: 0 0 30px 0;
+	margin: 0 auto;
+	width: 200px;
+	border: 2px solid #e2dcd5;
+	border-width: thin;
+
+	img {
+		width: 100%;
+		height: auto;
+		margin: 0 0 7px 0;
+		padding: 0;
+	}
+
+	hr {
+		background-color: #a09573;
+		height: 2px;
+		width: 20px;
+		margin: 0 auto 5px auto;
+		padding: 0;
+	}
+
+	h2, h3, p {
+		margin: 0;
+	}
+
+	h2, h3, p {
+		padding: 0 25px;
+		line-height: 1.47;
+	}
+	
+	h2 {
+		color: #303231;
+		font-size:15px !important;
+		font-weight: 700 !important;
+	}
+
+	a  {
+		text-decoration: none !important;
+		margin: 0;
+		padding: 0;
+		
+		h2 {
+			color: #303231;
+		}
+	}
+
+	h3 {
+		color: #ba633f;
+		font-size: 9px !important;
+		text-transform: uppercase;
+	}
+
+	p {
+		font-size: 12px;
+		font-family: 'sans-serif'
+	}
+	
+}
+
+.wpstarterplugin-block-select {
+	width: 100%;
+}

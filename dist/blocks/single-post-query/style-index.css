@@ -1,0 +1,76 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[9].use[0]!./src/blocks/single-post-query/style.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wpstarterplugin-single-post-query {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 12px;
+  background-color: #fff;
+  color: #5d6461;
+  padding: 0 0 30px 0;
+  margin: 0 auto;
+  width: 200px;
+  border: 2px solid #e2dcd5;
+  border-width: thin;
+}
+
+.wpstarterplugin-single-post-query img {
+  width: 100%;
+  height: auto;
+  margin: 0 0 7px 0;
+  padding: 0;
+}
+
+.wpstarterplugin-single-post-query hr {
+  background-color: #a09573;
+  height: 2px;
+  width: 20px;
+  margin: 0 auto 5px auto;
+  padding: 0;
+}
+
+.wpstarterplugin-single-post-query h2, .wpstarterplugin-single-post-query h3, .wpstarterplugin-single-post-query p {
+  margin: 0;
+  line-height: 1.47;
+}
+
+.wpstarterplugin-single-post-query h2, .wpstarterplugin-single-post-query h3, .wpstarterplugin-single-post-query p {
+  padding: 0 25px;
+}
+
+.wpstarterplugin-single-post-query h2 {
+  color: #303231;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.wpstarterplugin-single-post-query a {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wpstarterplugin-single-post-query a h2 {
+  color: #303231;
+}
+
+.wpstarterplugin-single-post-query h3 {
+  color: #ba633f;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.wpstarterplugin-single-post-query p {
+  font-size: 12px;
+  font-family: "sans-serif";
+}
+
+/*# sourceMappingURL=style-index.css.map*/

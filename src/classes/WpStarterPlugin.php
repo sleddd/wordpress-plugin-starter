@@ -32,14 +32,6 @@ class WpStarterPlugin extends Singleton {
 		// Add settings pages.
 		$plugin::register_settings_pages();
 
-		// Hide the ACF admin menu item.
-		add_filter(
-			'acf/settings/show_admin',
-			function ( $show_admin ) {
-				return false;
-			}
-		);
-
 		return $plugin;
 	}
 
@@ -76,7 +68,8 @@ class WpStarterPlugin extends Singleton {
 	public static function register_blocks() {
 		// Register blocks in the format $dir => $render_callback.
 		$blocks = array(
-			'hello-world' => ''		
+			'hello-world' => '', 
+			'single-post-query' => ''
 		);
 
 		foreach ( $blocks as $dir => $render_callback ) {
