@@ -14,7 +14,6 @@
         $category   = get_the_category( $post_id );
 
         // Get category name if applicable.
-        //var_dump($category);
         if ( ! empty( $category ) ) {
             $cat_link = site_url( $category[0]->taxonomy. '/' . $category[0]->slug );
             $category = $category[0]->name;
