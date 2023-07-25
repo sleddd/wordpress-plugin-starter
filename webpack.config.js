@@ -12,7 +12,6 @@ const RemoveEmptyScriptsPlugin = require("webpack-remove-empty-scripts");
 // Utilities.
 const path = require("path");
 
-// Add any a new entry point by extending the webpack config.
 module.exports = {
   ...defaultConfig,
   ...{
