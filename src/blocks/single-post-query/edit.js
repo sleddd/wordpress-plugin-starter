@@ -2,8 +2,6 @@ import { __ } from "@wordpress/i18n";
 
 import ServerSideRender from "@wordpress/server-side-render";
 
-import { useSelect } from "@wordpress/data";
-
 import apiFetch from "@wordpress/api-fetch";
 
 import AsyncSelect from "react-select/async";
@@ -39,12 +37,10 @@ export default function Edit({ attributes, setAttributes }) {
   // Sets up options for React-Select with Async.
   const promiseOptions = (inputValue) =>
     new Promise((resolve) => {
-      console.log(inputValue);
       setTimeout(() => {
         resolve(getPosts(inputValue));
       }, 1000);
     });
-
 
   // Handles updating attribute when post is selected.
   const handleSelectChange = (selectedPost) => {
