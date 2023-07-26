@@ -14,7 +14,6 @@
         $category   = get_the_category( $post_id );
 
         // Get category name if applicable.
-        //var_dump($category);
         if ( ! empty( $category ) ) {
             $cat_link = site_url( $category[0]->taxonomy. '/' . $category[0]->slug );
             $category = $category[0]->name;
@@ -23,7 +22,7 @@
         }
 
         $image      = get_the_post_thumbnail_url( $post_id );
-        $excerpt    = $post->post_content ? wp_trim_words( strip_shortcodes( $post->post_content ), 15, '...' ) : $excerpt;
+        $excerpt    = $post->post_content ? wp_trim_words( strip_shortcodes( $post->post_content ), 15, '...' ) : '';
         $permalink  = get_the_permalink( $post_id );
     }
 ?>

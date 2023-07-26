@@ -22,7 +22,7 @@
         }
 
         $image      = get_the_post_thumbnail_url( $post_id );
-        $excerpt    = $post->post_content ? wp_trim_words( strip_shortcodes( $post->post_content ), 15, '...' ) : $excerpt;
+        $excerpt    = $post->post_content ? wp_trim_words( strip_shortcodes( $post->post_content ), 15, '...' ) : '';
         $permalink  = get_the_permalink( $post_id );
     }
 ?>

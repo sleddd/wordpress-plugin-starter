@@ -2,7 +2,7 @@
 const defaultConfig = require("@wordpress/scripts/config/webpack.config");
 const { getWebpackEntryPoints } = require("@wordpress/scripts/utils/config");
 const magicImporter = require("node-sass-magic-importer");
-const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin');
+const IgnoreEmitPlugin = require("ignore-emit-webpack-plugin");
 
 const isProduction = false;
 
@@ -16,11 +16,15 @@ module.exports = {
   ...defaultConfig,
   ...{
     entry: {
-      ...getWebpackEntryPoints(), 
-      "css/frontend": path.resolve(__dirname, "src/assets/scss", "frontend.scss"),
+      ...getWebpackEntryPoints(),
+      "css/frontend": path.resolve(
+        __dirname,
+        "src/assets/scss",
+        "frontend.scss"
+      ),
       "css/backend": path.resolve(__dirname, "src/assets/scss", "backend.scss"),
       "js/frontend": path.resolve(__dirname, "src/assets/js", "frontend.js"),
-      "js/backend": path.resolve(__dirname, "src/assets/js", "backend.js")
+      "js/backend": path.resolve(__dirname, "src/assets/js", "backend.js"),
     },
     module: {
       ...defaultConfig.module,
@@ -28,18 +32,18 @@ module.exports = {
         ...defaultConfig.module.rules,
 
         {
-            test: /\.(sc|sa)ss$/,
-            use: [
-                {
-                    loader: require.resolve( 'sass-loader' ),
-                    options: {
-                        sourceMap: false,
-                        sassOptions: {
-                            importer: magicImporter()
-                        }
-                    },
+          test: /\.(sc|sa)ss$/,
+          use: [
+            {
+              loader: require.resolve("sass-loader"),
+              options: {
+                sourceMap: false,
+                sassOptions: {
+                  importer: magicImporter(),
                 },
-            ],
+              },
+            },
+          ],
         },
       ],
     },
@@ -52,5 +56,5 @@ module.exports = {
         stage: RemoveEmptyScriptsPlugin.STAGE_AFTER_PROCESS_PLUGINS,
       }),
     ],
-  }
+  },
 };
