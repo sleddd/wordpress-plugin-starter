@@ -225,31 +225,34 @@ function add_meta_box( $title = '', $meta_prefix = null, $fields = array(), $con
 							echo '<div class="wp_starter_plugin_custom_meta">';
 							/* Loop through $custom_fields */
 							foreach ( $custom_fields as $label => $field ) {
-								$field_id_name = strtolower( str_replace( ' ', '_', $data['id'] ) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
+								$label = wp_kses_post( $label );
+								$field_id_name = esc_attr( strtolower( str_replace( ' ', '_', $data['id'] ) ) . '_' . strtolower( str_replace( ' ', '_', $label ) ) );
 								switch ( $field['type'] ) {
-									case 'text':
+									case 'text':										
 										$value = is_array( $meta ) && array_key_exists( $field_id_name, $meta ) ? $meta[ $field_id_name ][0] : '';
 										echo '<label for="' . $field_id_name . '">' . $label . '</label><input type="text" name="' . $field_id_name . '" id="' . $field_id_name . '" value="' . wp_kses_post( $value ) . '" />';
 										if ( array_key_exists( 'desc', $field ) ) {
-											echo '<span class="description">' . $field['desc'] . '</span>';
+											echo '<span class="description">' . wp_kses_post( $field['desc'] ) . '</span>';
 										}
 										break;
 									case 'textarea':
 										$value = is_array( $meta ) && array_key_exists( $field_id_name, $meta ) ? $meta[ $field_id_name ][0] : '';
 										echo '<label for="' . $field_id_name . '">' . $label . '</label><textarea name="' . $field_id_name . '" id="' . $field_id_name . '">' . wp_kses_post( $value ) . '</textarea>';
 										if ( array_key_exists( 'desc', $field ) ) {
-											echo '<span class="description">' . $field['desc'] . '</span>';
+											echo '<span class="description">' . wp_kses_post( $field['desc'] ) . '</span>';
 										}
 										break;
 									case 'checkbox':
 										echo '<label for="' . $field_id_name . '">' . $label . '</label>';
 										if ( array_key_exists( 'options', $field ) ) {
 											$options_count = 0;
-											$saved_options = is_array( $meta ) && array_key_exists( $field_id_name, $meta ) ? maybe_unserialize( $meta[ $field_id_name ][0] ) : [];
+											$saved_options = is_array( $meta ) && array_key_exists( $field_id_name, $meta ) ? $meta[ $field_id_name ][0] : [];
+											$saved_options = maybe_unserialize( $saved_options );
 											echo '<div class="fieldset">';
 											foreach ( $field['options'] as $label => $value ) {
+												$label = wp_kses_post( $label );
 												$checked = ! empty( $saved_options ) && isset( $saved_options[ $options_count ] ) && $saved_options[ $options_count ] === $value ? 'checked="checked"' : '';
-												echo '<label for="' . $field_id_name . '">' . $label . '</label><input type="checkbox" name="' . $field_id_name . '[' . $options_count . ']" id="' . $field_id_name . '" value="' . $value . '"' . $checked . '/>';
+												echo '<label for="' . $field_id_name . '">' . $label . '</label><input type="checkbox" name="' . $field_id_name . '[' . $options_count . ']" id="' . $field_id_name . '" value="' . esc_attr( $value ) . '"' . $checked . '/>';
 												$options_count++;
 											}
 											echo '</div>';
@@ -262,24 +265,26 @@ function add_meta_box( $title = '', $meta_prefix = null, $fields = array(), $con
 										echo '<label for="' . $field_id_name . '">' . $label . '</label>';
 										echo '<div class="fieldset">';
 										foreach ( $field['options'] as $label => $value ) {
+											$label = wp_kses_post( $label );
 											$checked =  is_array( $meta ) && array_key_exists( $field_id_name, $meta ) && $meta[ $field_id_name ][0] === $value ? 'checked="checked"' : '';
-											echo '<label for="' . $field_id_name . '">' . $label . '</label><input type="radio" name="' . $field_id_name . '" id="' . $field_id_name . '" value="' . $value . '"' . $checked . '/>';
+											echo '<label for="' . $field_id_name . '">' . $label . '</label><input type="radio" name="' . $field_id_name . '" id="' . $field_id_name . '" value="' . esc_attr( $value ) . '"' . $checked . '/>';
 										}
 										echo '</div>';
 										if ( array_key_exists( 'desc', $field ) ) {
-											echo '<span class="description">' . $field['desc'] . '</span>';
+											echo '<span class="description">' . wp_kses_post( $field['desc'] ) . '</span>';
 										}
 										break;
 									case 'select':
 										echo '<label for="' . $field_id_name . '">' . $label . '</label>';
 										echo '<select name="' . $field_id_name . '" id="' . $field_id_name . '">';
 										foreach ( $field['options'] as $label => $value ) {
+											$label = wp_kses_post( $label );
 											$selected =  is_array( $meta ) && array_key_exists( $field_id_name, $meta ) && $meta[ $field_id_name ][0] == $value ? 'selected="selected"' : '';
-											echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+											echo '<option value="' . wp_kses_post( $value ) . '"' . $selected . '>' . $label . '</option>';
 										}
 										echo '</select>';
 										if ( array_key_exists( 'desc', $field ) ) {
-											echo '<span class="description">' . $field['desc'] . '</span>';
+											echo '<span class="description">' . wp_kses_post( $field['desc'] ) . '</span>';
 										}
 										break;
 								}
@@ -320,11 +325,11 @@ function add_meta_box( $title = '', $meta_prefix = null, $fields = array(), $con
 						foreach ( $fields as $label => $type ) {
 							$field_id_name = strtolower( str_replace( ' ', '_', $title ) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
 							$old           = get_post_meta( $post->ID, $field_id_name, true );
-							$new           = $_POST[ $field_id_name ];
-							if ( '' == $new && $old ) {
-								delete_post_meta( $post->ID, $field_id_name, $_POST[ $field_id_name ] );
+							$new           = is_array( $_POST[ $field_id_name ] ) ? $_POST[ $field_id_name ] : esc_html( $_POST[ $field_id_name ] );
+							if ( gettype( $new ) == 'string' && strlen( $new ) <= 0 ) {
+								delete_post_meta( $post->ID, $field_id_name );
 							} else {
-								update_post_meta( $post->ID, $field_id_name, $_POST[ $field_id_name ] );
+								update_post_meta( $post->ID, $field_id_name, $new );
 							}
 						}
 					}
