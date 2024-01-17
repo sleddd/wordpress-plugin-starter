@@ -16,14 +16,14 @@
 				"plugin-zip": "wp-scripts plugin-zip"
 		},
 		"devDependencies": {
-				"@wordpress/browserslist-config": "^5.21.0",
-				"@wordpress/scripts": "^26.9.0",
+				"@wordpress/browserslist-config": "^5.32.0",
+				"@wordpress/scripts": "^26.19.0",
 				"ignore-emit-webpack-plugin": "^2.0.6",
 				"node-sass-magic-importer": "^5.3.3",
-				"webpack-remove-empty-scripts": "^1.0.3"
+				"webpack-remove-empty-scripts": "^1.0.4"
 		},
 		"dependencies": {
-				"classnames": "^2.3.2"
+				"classnames": "^2.5.1"
 		},
 		"browserslist": [
 				"extends @wordpress/browserslist-config"
