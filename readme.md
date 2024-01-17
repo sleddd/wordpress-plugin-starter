@@ -5,10 +5,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 WordPress plugin starter code for easier development.
 
-![Composer](https://img.shields.io/badge/Composer-brightgreen)
-![Node](https://img.shields.io/badge/Node-brightgreen)
-![WebPack](https://img.shields.io/badge/WebPack-brightgreen)
-
 This plugin uses WordPress wp-scripts to transpile blocks with a custom webpack config override to compile additional js and css. 
 
 ---
