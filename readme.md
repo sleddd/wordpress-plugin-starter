@@ -1,4 +1,5 @@
 # WordPress Starter or Boilerplate Plugin
+
 Contributors: Claudette Raynor \
 License: GPLv2 or later \
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -17,7 +18,6 @@ WordPress plugin starter code for easier development.
   - npm install
   - npm run start
 3. Activate the plugin through the 'Plugins' menu in WordPress
-
 ---
 ### Additional Notes
 
@@ -35,15 +35,15 @@ To add custom settings or options pages see examples:
 
 Note: You will need the ACF plugin if you implement the ACF settings page.
 
-----------------
-GUTENBERG BLOCKS 
+---
+### Gutenberg Blocks
 
 See hello-world block as an example: 
 ```
 src/blocks/hello-world
 ```
-------------------
-MAKING IT YOUR OWN
+---
+### Make It Your Own
 
 To rename this plugin with your plugin name, you will want to find and replace the following: 
 - WP_STARTER_PLUGIN
@@ -52,5 +52,5 @@ To rename this plugin with your plugin name, you will want to find and replace t
 
 Run composer dump-autoload -o to rebuild the autoload files when done.
 
-------------------
+---
 !! This plugin is not currently maintained except when I get time.
