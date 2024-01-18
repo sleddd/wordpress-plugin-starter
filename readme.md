@@ -21,7 +21,7 @@ WordPress plugin starter code for easier development.
 ---
 ### Additional Notes
 
-To see how to add a custom post type, review the example: 
+To add a custom post type, review the example: 
 ```
 src/classes/PostTypes/ExamplePostType.php
 ```
