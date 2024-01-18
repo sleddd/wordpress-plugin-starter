@@ -1,4 +1,4 @@
-# WordPress Starter/Boilerplate Plugin
+# WordPress Plugin Starter Code
 
 Contributors: Claudette Raynor \
 License: GPLv2 or later \
