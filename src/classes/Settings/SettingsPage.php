@@ -16,7 +16,6 @@ class SettingsPage {
 	 */
 	public static $SETTINGS_PAGE = array();
 
-
 	/**
 	 * Defines settings page tab properties.
 	 *
@@ -28,7 +27,6 @@ class SettingsPage {
 	 * }
 	 */
 	public static $SETTINGS_TABS = array();
-
 
 	/**
 	 * Defines settings page sections.
@@ -65,19 +63,18 @@ class SettingsPage {
 	 */
 	public static $SETTINGS_FIELDS = array();
 
-
 	/**
 	 * Adds admin menu page using $SETTINGS_PAGE.
 	 */
 	public function add_page() {
 		add_action(
 			'admin_menu',
-			function() {
+			function () {
 				if ( array_key_exists( 'parent_slug', static::$SETTINGS_PAGE ) ) {
 					add_submenu_page(
 						static::$SETTINGS_PAGE['parent_slug'],
-						__( static::$SETTINGS_PAGE['page_title'], 'wpstarterplugin' ),
-						__( static::$SETTINGS_PAGE['menu_title'], 'wpstarterplugin' ),
+						esc_html__( static::$SETTINGS_PAGE['page_title'], 'wpstarterplugin' ),
+						esc_html__( static::$SETTINGS_PAGE['menu_title'], 'wpstarterplugin' ),
 						static::$SETTINGS_PAGE['capability'],
 						static::$SETTINGS_PAGE['slug'],
 						array( $this, 'render_page' ),
@@ -85,8 +82,8 @@ class SettingsPage {
 					);
 				} else {
 					add_menu_page(
-						__( static::$SETTINGS_PAGE['page_title'], 'wpstarterplugin' ),
-						__( static::$SETTINGS_PAGE['menu_title'], 'wpstarterplugin' ),
+						esc_html__( static::$SETTINGS_PAGE['page_title'], 'wpstarterplugin' ),
+						esc_html__( static::$SETTINGS_PAGE['menu_title'], 'wpstarterplugin' ),
 						static::$SETTINGS_PAGE['capability'],
 						static::$SETTINGS_PAGE['slug'],
 						array( $this, 'render_page' ),
@@ -97,22 +94,25 @@ class SettingsPage {
 		);
 	}
 
-
 	/**
 	 * Renders admin menu page using $SETTINGS_PAGE.
 	 *
 	 * If the page is saving fields, it will save fields from $_POST array.
 	 */
 	public function render_page() {
-		if ( $_POST ) {
-			static::save_fields( $_POST );
+		if ( ! current_user_can( static::$SETTINGS_PAGE['capability'] ) ) {
+			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'wpstarterplugin' ) );
 		}
-		$page       = $this::$SETTINGS_PAGE['slug'];
-		$page_title = $this::$SETTINGS_PAGE['page_title'];
-		$tabs       = $this::$SETTINGS_TABS;
-		include WP_STARTER_PLUGIN_PATH . '/src/templates/settings/' . static::$SETTINGS_PAGE['template'] . '.php';
-	}
 
+		if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['admin_form_submission'] ) ) {
+			$this->save_fields( $_POST );
+		}
+
+		$page       = esc_attr( static::$SETTINGS_PAGE['slug'] );
+		$page_title = esc_html( static::$SETTINGS_PAGE['page_title'] );
+		$tabs       = static::$SETTINGS_TABS;
+		include WP_STARTER_PLUGIN_PATH . '/src/templates/settings/' . sanitize_file_name( static::$SETTINGS_PAGE['template'] ) . '.php';
+	}
 
 	/**
 	 * Adds sections to page using $SETTINGS_PAGE, $SETTINGS_SECTIONS.
@@ -122,13 +122,12 @@ class SettingsPage {
 		foreach ( static::$SETTINGS_SECTIONS as $section ) {
 			add_settings_section(
 				$section['id'],
-				$section['title'],
+				wp_kses_post( $section['title'] ),
 				array( $this, 'render_sections' ),
 				$page_slug
 			);
 		}
 	}
-
 
 	/**
 	 * Renders settings sections using $SETTINGS_SECTIONS.
@@ -136,11 +135,10 @@ class SettingsPage {
 	public function render_sections( $section ) {
 		foreach ( $this::$SETTINGS_SECTIONS as $sub_section ) {
 			if ( $section['id'] == $sub_section['id'] ) {
-				include WP_STARTER_PLUGIN_PATH . '/src/templates/settings/' . $sub_section['template'] . '.php';
+				include WP_STARTER_PLUGIN_PATH . '/src/templates/settings/' . sanitize_file_name( $sub_section['template'] ) . '.php';
 			}
 		}
 	}
-
 
 	/**
 	 * Adds and registers settings fields using $SETTINGS_PAGE, $SETTINGS_FIELDS.
@@ -151,19 +149,23 @@ class SettingsPage {
 			$field['id'] = $id;
 			add_settings_field(
 				$id,
-				$field['label'],
+				wp_kses_post( $field['label'] ),
 				array( $this, 'render_fields' ),
 				$page_slug,
 				$field['section'],
-				$field,
+				$field
 			);
 			register_setting(
 				$page_slug,
-				$id
+				$id,
+				array(
+					'sanitize_callback' => function ( $value ) {
+						return $this->sanitize_field( $value, 'text' );
+					},
+				)
 			);
 		}
 	}
-
 
 	/**
 	 * Saves fields for a settings page.
@@ -171,26 +173,43 @@ class SettingsPage {
 	 * @param array $fields Fields to be saved.
 	 */
 	public static function save_fields( $fields ) {
-		if ( check_admin_referer( 'wpstarter_plugin_form_nonce', 'admin_form_submission' ) ) {
-			if ( current_user_can( static::$SETTINGS_PAGE['capability'] ) ) {
-				foreach ( $fields as  $field_name => $value ) {
-					if ( array_key_exists( $field_name, static::$SETTINGS_FIELDS ) ) {
-						$setting = static::$SETTINGS_FIELDS[ $field_name ];
-						switch ( $setting['type'] ) {
-							case 'text':
-								$value = sanitize_text_field( $value );
-								break;
-							case 'textarea':
-								$value = sanitize_textarea_field( $value );
-								break;
-						}
-						update_option( $field_name, $value );
-					}
-				}
+		if ( ! isset( $fields['admin_form_submission'] ) ||
+			! wp_verify_nonce( $fields['admin_form_submission'], 'wpstarter_plugin_form_nonce' ) ||
+			! current_user_can( static::$SETTINGS_PAGE['capability'] )
+		) {
+			wp_die( esc_html__( 'Sorry, you are not allowed to perform this action.', 'wpstarterplugin' ) );
+		}
+
+		foreach ( $fields as $field_name => $value ) {
+			if ( array_key_exists( $field_name, static::$SETTINGS_FIELDS ) ) {
+				$sanitized_value = self::sanitize_field( $value, static::$SETTINGS_FIELDS[ $field_name ]['type'] );
+				update_option( $field_name, $sanitized_value );
 			}
 		}
 	}
 
+	/**
+	 * Sanitizes a field based on its type.
+	 *
+	 * @param mixed  $value The value to sanitize.
+	 * @param string $type The type of the field.
+	 * @return mixed The sanitized value.
+	 */
+	public static function sanitize_field( $value, $type ) {
+		switch ( $type ) {
+			case 'text':
+				return sanitize_text_field( $value );
+			case 'textarea':
+				return sanitize_textarea_field( $value );
+			case 'checkbox':
+				return is_array( $value ) ? array_map( 'sanitize_text_field', $value ) : array();
+			case 'radio':
+			case 'select':
+				return sanitize_text_field( $value );
+			default:
+				return $value;
+		}
+	}
 
 	/**
 	 * Renders a settings field by type.
@@ -209,7 +228,7 @@ class SettingsPage {
 				echo '</div>';
 				break;
 			case 'textarea':
-				echo '<div><textarea name="' . esc_attr( $field['id'] ) . '" id="' . esc_attr( $field['id'] ) . '">' . esc_attr( $option ) . '</textarea>';
+				echo '<div><textarea name="' . esc_attr( $field['id'] ) . '" id="' . esc_attr( $field['id'] ) . '">' . esc_textarea( $option ) . '</textarea>';
 				if ( array_key_exists( 'description', $field ) ) {
 					echo '<span class="description">' . wp_kses_post( $field['description'] ) . '</span>';
 				}
@@ -221,8 +240,9 @@ class SettingsPage {
 					$options_count = 1;
 					foreach ( $field['options'] as $field_option ) {
 						$checked = is_array( $option ) && isset( $option[ $options_count ] ) && $option[ $options_count ] === $field_option['value'] ? 'checked="checked"' : '';
-						echo '<label for="' . esc_attr( $field['id'] ) . '">' . wp_kses_post( $field_option['label'] ) . '</label><input type="checkbox" name="' . esc_attr( $field['id'] ) . '[' . (int) $options_count . ']" id="' . esc_attr( $field['id'] ) . '[' . (int) $options_count . ']" value="' . esc_attr( $field_option['value'] ) . '"' . $checked . '/>';
-						$options_count++;
+						echo '<label for="' . esc_attr( $field['id'] ) . '_' . $options_count . '">' . wp_kses_post( $field_option['label'] ) . '</label>';
+						echo '<input type="checkbox" name="' . esc_attr( $field['id'] ) . '[' . (int) $options_count . ']" id="' . esc_attr( $field['id'] ) . '_' . $options_count . '" value="' . esc_attr( $field_option['value'] ) . '"' . $checked . '/>';
+						++$options_count;
 					}
 					echo '<input type="hidden" name="' . esc_attr( $field['id'] ) . '[hidden]" value="0"/>';
 					echo '</div>';
@@ -230,15 +250,13 @@ class SettingsPage {
 						echo '<span class="description">' . wp_kses_post( $field['description'] ) . '</span>';
 					}
 				}
-				if ( array_key_exists( 'desc', $field ) ) {
-					echo '<span class="description">' . wp_kses_post( $field['desc'] ) . '</span>';
-				}
 				break;
 			case 'radio':
 				echo '<div class="fieldset">';
 				foreach ( $field['options'] as $field_option ) {
 					$checked = $option === $field_option['value'] ? 'checked="checked"' : '';
-					echo '<label for="' . esc_attr( $field['id'] ) . '">' . wp_kses_post( $field_option['label'] ) . '</label><input type="radio" name="' . esc_attr( $field['id'] ) . '" id="' . esc_attr( $field['id'] ) . '" value="' . esc_attr( $field_option['value'] ) . '"' . $checked . '/>';
+					echo '<label for="' . esc_attr( $field['id'] ) . '_' . sanitize_key( $field_option['value'] ) . '">' . wp_kses_post( $field_option['label'] ) . '</label>';
+					echo '<input type="radio" name="' . esc_attr( $field['id'] ) . '" id="' . esc_attr( $field['id'] ) . '_' . sanitize_key( $field_option['value'] ) . '" value="' . esc_attr( $field_option['value'] ) . '"' . $checked . '/>';
 				}
 				echo '</div>';
 				if ( array_key_exists( 'description', $field ) ) {
@@ -247,9 +265,9 @@ class SettingsPage {
 				break;
 			case 'select':
 				echo '<br/><select name="' . esc_attr( $field['id'] ) . '" id="' . esc_attr( $field['id'] ) . '">';
-				echo '<option class="disabled">' . __( wp_kses_post( $field['label'] ), 'wpstarterplugin' ) . '</option>';
+				echo '<option value="" disabled>' . esc_html__( $field['label'], 'wpstarterplugin' ) . '</option>';
 				foreach ( $field['options'] as $field_option ) {
-					echo '<option', $option === $field_option['value'] ? ' selected="selected"' : '', ' value="' . esc_attr( $field_option['value'] ) . '">' . wp_kses_post( $field_option['label'] ) . '</option>';
+					echo '<option', $option === $field_option['value'] ? ' selected="selected"' : '', ' value="' . esc_attr( $field_option['value'] ) . '">' . esc_html( $field_option['label'] ) . '</option>';
 				}
 				echo '</select>';
 				if ( array_key_exists( 'description', $field ) ) {
@@ -258,5 +276,4 @@ class SettingsPage {
 				break;
 		}
 	}
-
 }

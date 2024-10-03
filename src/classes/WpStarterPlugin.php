@@ -21,7 +21,7 @@ class WpStarterPlugin extends Singleton {
 		$plugin::register_cpts();
 
 		// Register custom blocks.
-		$plugin::register_blocks();
+		add_action( 'init', array( __NAMESPACE__ . '\\WpStarterPlugin', 'register_blocks' ) );
 
 		// Enqueue scripts and styles.
 		add_action( 'wp_enqueue_scripts', array( __NAMESPACE__ . '\\WpStarterPlugin', 'enqueue_frontend_styles' ) );
